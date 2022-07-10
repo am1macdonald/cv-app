@@ -14,14 +14,14 @@ class App extends Component {
         email: "",
         phoneNumber: ""
       },
-      education: [] 
+      education: {} 
       // format //
       /* {
         schoolName: "",
         titleOfStudy: "",
         dateOfStudy: ""
       }*/,
-      experience: []
+      experience: {}
       // format //
       /* {
         companyName: "",
@@ -32,6 +32,7 @@ class App extends Component {
     }
 
     this.updateInfo = this.updateInfo.bind(this);
+    this.addExperience = this.addExperience.bind(this)
   }
 
   updateInfo(name, email, phone) {
@@ -46,17 +47,21 @@ class App extends Component {
     });
   }
   newSchool() {
-
-  }
-
-  newExperience(companyName, positionTitle) {
-    return {
-      companyName: `${companyName}`,
-      positionTitle: `${positionTitle}`,
-      duties: "",
-      datesOfEmployment: ""
+    return{
+      
     }
+
   }
+
+  addExperience(obj) {
+    console.log(obj)
+    this.setState(
+      {
+        experience: this.experience
+      }
+    )
+  }
+
 
   render() {
     return (
@@ -64,7 +69,7 @@ class App extends Component {
         <h1>Resume Generator</h1>
         <InfoForm onButtonClicked={this.updateInfo}/>
         <EducationForm />
-        <ExperienceForm />
+        <ExperienceForm onButtonClicked={this.addExperience}/>
       </div>
     )
   }
