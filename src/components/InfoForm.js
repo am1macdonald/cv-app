@@ -1,27 +1,29 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
+import PropTypes from "prop-types";
 
 class InfoForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-        name: {
-          value: '',
-          id: uniqid()
-        },
-        email: {
-          value: '',
-          id: uniqid()
-        },
-        phoneNumber: {
-          value: '',
-          id: uniqid()
-        }
-    }
+      name: {
+        value: "",
+        id: uniqid(),
+      },
+      email: {
+        value: "",
+        id: uniqid(),
+      },
+      phoneNumber: {
+        value: "",
+        id: uniqid(),
+      },
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.newInfo = this.newInfo.bind(this);
   }
 
   handleChange(e) {
@@ -29,36 +31,81 @@ class InfoForm extends Component {
     this.setState({
       [e.target.name]: {
         value: e.target.value,
-        id: this.state[e.target.name].id
-      }
-    })
+        id: this.state[e.target.name].id,
+      },
+    });
   }
-  
-  handleClick(e) {
-    e.preventDefault()
-    console.log(this.props);
-  }
-  render() {
 
+  handleClick(e) {
+    e.preventDefault();
+    this.props.onButtonClicked(this.newInfo());
+    this.setState({
+      name: {
+        value: "",
+        id: uniqid(),
+      },
+      email: {
+        value: "",
+        id: uniqid(),
+      },
+      phoneNumber: {
+        value: "",
+        id: uniqid(),
+      },
+    });
+  }
+
+  newInfo() {
+    return {
+      name: this.state.name.value,
+      email: this.state.email.value,
+      phoneNumber: this.state.phoneNumber.value,
+    };
+  }
+
+  render() {
     return (
       <form action="">
         <div>
           <label htmlFor="name">Name: </label>
-          <input type="text" name="name" id="name" value={this.state.name.value} onChange={this.handleChange}/>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={this.state.name.value}
+            onChange={this.handleChange}
+          />
         </div>
         <div>
           <label htmlFor="email">Email: </label>
-          <input type="email" name="email" id="email" value={this.state.email.value} onChange={this.handleChange}/>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={this.state.email.value}
+            onChange={this.handleChange}
+          />
         </div>
         <div>
           <label htmlFor="phone-number">Phone Number: </label>
-          <input type="text" name="phoneNumber" id="phone-number" value={this.state.phoneNumber.value} onChange={this.handleChange}/>
+          <input
+            type="text"
+            name="phoneNumber"
+            id="phone-number"
+            value={this.state.phoneNumber.value}
+            onChange={this.handleChange}
+          />
         </div>
-        <button type="submit" onClick={this.handleClick}>Submit</button>
-
+        <button type="submit" onClick={this.handleClick}>
+          Submit
+        </button>
       </form>
-    )
+    );
   }
 }
 
-export default InfoForm
+InfoForm.propTypes = {
+  onButtonClicked: PropTypes.func,
+};
+
+export default InfoForm;
