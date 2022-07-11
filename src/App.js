@@ -5,6 +5,8 @@ import ExperienceForm from './components/ExperienceForm';
 import InfoForm from './components/InfoForm';
 import InfoDisplay from './components/InfoDisplay'
 import ExperienceDisplay from './components/ExperienceDisplay';
+import uniqid from 'uniqid'
+import EducationDisplay from './components/EducationDisplay';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +18,14 @@ class App extends Component {
         email: "hole@mail.org",
         phoneNumber: "234.234.2344"
       },
-      education: []
+      education: [
+        {
+        schoolName: "College",
+        titleOfStudy: "Degree",
+        graduationDate: "2015-02-01",
+        gpa: "3.7"
+      }
+    ]
       // format //
       /* {
         schoolName: "",
@@ -30,6 +39,7 @@ class App extends Component {
           duties: "a description of duties",
           startDate: "2020-01-01",
           endDate: "2021-01-01",
+          id: uniqid()
         }
       ]
     }
@@ -37,6 +47,7 @@ class App extends Component {
 
     this.updateInfo = this.updateInfo.bind(this);
     this.addExperience = this.addExperience.bind(this)
+    this.addEducation = this.addEducation.bind(this)
   }
 
   updateInfo(name, email, phone) {
@@ -50,18 +61,18 @@ class App extends Component {
       experience: this.state.experience
     });
   }
-  newSchool() {
-    return{
-      
-    }
 
-  }
 
   addExperience(obj) {
     this.setState({
       experience: [...this.state.experience, obj]
     })
-    localStorage.setItem('state', this.state)
+  }
+
+  addEducation(obj) {
+    this.setState({
+      education: [...this.state.education, obj]
+    })
   }
 
 
@@ -70,10 +81,11 @@ class App extends Component {
       <div className="main">
         <h1>Resume Generator</h1>
         <InfoForm onButtonClicked={this.updateInfo}/>
-        <EducationForm />
+        <EducationForm onButtonClicked={this.addEducation} />
         <ExperienceForm onButtonClicked={this.addExperience}/>
         <InfoDisplay personalInfo={this.state.personalInfo} />
         <ExperienceDisplay experiences={this.state.experience} />
+        <EducationDisplay education={this.state.education}/>
       </div>
     )
   }
