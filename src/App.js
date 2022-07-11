@@ -3,6 +3,8 @@ import './app.css';
 import EducationForm from './components/EducationForm';
 import ExperienceForm from './components/ExperienceForm';
 import InfoForm from './components/InfoForm';
+import InfoDisplay from './components/InfoDisplay'
+import ExperienceDisplay from './components/ExperienceDisplay';
 
 class App extends Component {
   constructor(props) {
@@ -10,18 +12,18 @@ class App extends Component {
 
     this.state = {
       personalInfo : {
-        name: "",
-        email: "",
-        phoneNumber: ""
+        name: "Arse",
+        email: "hole@mail.org",
+        phoneNumber: "234.234.2344"
       },
-      education: {} 
+      education: []
       // format //
       /* {
         schoolName: "",
         titleOfStudy: "",
         dateOfStudy: ""
       }*/,
-      experience: {}
+      experience: []
       // format //
       /* {
         companyName: "",
@@ -54,12 +56,9 @@ class App extends Component {
   }
 
   addExperience(obj) {
-    console.log(obj)
-    this.setState(
-      {
-        experience: this.experience
-      }
-    )
+    this.setState({
+      experience: [...this.state.experience, obj]
+    })
   }
 
 
@@ -70,6 +69,8 @@ class App extends Component {
         <InfoForm onButtonClicked={this.updateInfo}/>
         <EducationForm />
         <ExperienceForm onButtonClicked={this.addExperience}/>
+        <InfoDisplay personalInfo={this.state.personalInfo} />
+        <ExperienceDisplay experiences={this.state.experience} />
       </div>
     )
   }

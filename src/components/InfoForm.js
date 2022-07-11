@@ -10,8 +10,14 @@ class InfoForm extends Component {
           value: '',
           id: uniqid()
         },
-        email: "",
-        phoneNumber: ""
+        email: {
+          value: '',
+          id: uniqid()
+        },
+        phoneNumber: {
+          value: '',
+          id: uniqid()
+        }
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -20,6 +26,12 @@ class InfoForm extends Component {
 
   handleChange(e) {
     e.preventDefault();
+    this.setState({
+      [e.target.name]: {
+        value: e.target.value,
+        id: this.state[e.target.name].id
+      }
+    })
   }
   
   handleClick(e) {
@@ -36,11 +48,11 @@ class InfoForm extends Component {
         </div>
         <div>
           <label htmlFor="email">Email: </label>
-          <input type="email" name="email" id="email" onChange={this.handleChange}/>
+          <input type="email" name="email" id="email" value={this.state.email.value} onChange={this.handleChange}/>
         </div>
         <div>
           <label htmlFor="phone-number">Phone Number: </label>
-          <input type="text" name="phone-number" id="phone-number" onChange={this.handleChange}/>
+          <input type="text" name="phoneNumber" id="phone-number" value={this.state.phoneNumber.value} onChange={this.handleChange}/>
         </div>
         <button type="submit" onClick={this.handleClick}>Submit</button>
 
