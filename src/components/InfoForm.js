@@ -1,15 +1,17 @@
 import React, { Component } from "react";
+import uniqid from "uniqid";
 
 class InfoForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      personalInfo : {
-        name: "",
+        name: {
+          value: '',
+          id: uniqid()
+        },
         email: "",
         phoneNumber: ""
-      }
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -18,10 +20,8 @@ class InfoForm extends Component {
 
   handleChange(e) {
     e.preventDefault();
-    this.setState({
-      
-    })
   }
+  
   handleClick(e) {
     e.preventDefault()
     console.log(this.props);
@@ -32,7 +32,7 @@ class InfoForm extends Component {
       <form action="">
         <div>
           <label htmlFor="name">Name: </label>
-          <input type="text" name="name" id="name" onChange={this.handleChange}/>
+          <input type="text" name="name" id="name" value={this.state.name.value} onChange={this.handleChange}/>
         </div>
         <div>
           <label htmlFor="email">Email: </label>
