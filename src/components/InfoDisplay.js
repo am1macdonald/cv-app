@@ -10,6 +10,7 @@ constructor(props){
 render() {
   return (
     <div>
+      <h2>Contact Information:</h2>
       <div>
         <p>Name: {this.props.personalInfo.name}</p>
         <p>Email: {this.props.personalInfo.email}</p>
