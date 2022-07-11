@@ -23,15 +23,17 @@ class App extends Component {
         titleOfStudy: "",
         dateOfStudy: ""
       }*/,
-      experience: []
-      // format //
-      /* {
-        companyName: "",
-        positionTitle: "",
-        duties: "",
-        datesOfEmployment: ""
-      }*/,
+      experience: [
+        {
+          companyName: "Place 1",
+          positionTitle: "Jobby 1",
+          duties: "a description of duties",
+          startDate: "2020-01-01",
+          endDate: "2021-01-01",
+        }
+      ]
     }
+
 
     this.updateInfo = this.updateInfo.bind(this);
     this.addExperience = this.addExperience.bind(this)
@@ -59,6 +61,7 @@ class App extends Component {
     this.setState({
       experience: [...this.state.experience, obj]
     })
+    localStorage.setItem('state', this.state)
   }
 
 
