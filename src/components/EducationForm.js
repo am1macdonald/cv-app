@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 class EducationForm extends Component {
   constructor(props) {
@@ -51,6 +51,7 @@ class EducationForm extends Component {
         id: uniqid(),
       },
     });
+    this.props.toggleAdder();
   }
   handleChange(e) {
     e.preventDefault();
@@ -119,7 +120,11 @@ class EducationForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="button" className="btn btn-primary" onClick={this.handleClick}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.handleClick}
+        >
           Add
         </button>
       </form>
@@ -128,7 +133,8 @@ class EducationForm extends Component {
 }
 
 EducationForm.propTypes = {
-  onButtonClicked: PropTypes.func
-}
+  onButtonClicked: PropTypes.func,
+  toggleAdder: PropTypes.func,
+};
 
 export default EducationForm;

@@ -121,9 +121,13 @@ class App extends Component {
           education={this.state.education}
           delete={this.deleteEducation}
           toggleAdder={this.toggleEducationForm}
+          formActive={this.state.educationFormActive}
         />
         {this.state.educationFormActive && (
-          <EducationForm onButtonClicked={this.addEducation} />
+          <EducationForm
+            onButtonClicked={this.addEducation}
+            toggleAdder={this.toggleEducationForm}
+          />
         )}
         <ExperienceDisplay
           experiences={this.state.experience}

@@ -41,13 +41,15 @@ function EducationDisplay(props) {
     <div className="container-sm">
       <h2>Education:</h2>
       <ul>{eduNodes}</ul>
-      <button
-        className="btn btn-primary"
-        type="button"
-        onClick={props.toggleAdder}
-      >
-        Add Education
-      </button>
+      {!props.formActive && (
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={props.toggleAdder}
+        >
+          Add Education
+        </button>
+      )}
     </div>
   );
 }
@@ -56,6 +58,7 @@ EducationDisplay.propTypes = {
   education: PropTypes.array,
   delete: PropTypes.func,
   toggleAdder: PropTypes.func,
+  formActive: PropTypes.bool
 };
 
 export default EducationDisplay;
