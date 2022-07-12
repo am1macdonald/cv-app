@@ -69,7 +69,9 @@ class InfoForm extends Component {
     return (
       <form className="container-sm mb-5">
         <div className="mb-3">
-          <label className="form-label" htmlFor="name">Name</label>
+          <label className="form-label" htmlFor="name">
+            Name
+          </label>
           <input
             className="form-control"
             type="text"
@@ -80,7 +82,9 @@ class InfoForm extends Component {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="email">Email</label>
+          <label className="form-label" htmlFor="email">
+            Email
+          </label>
           <input
             className="form-control"
             type="email"
@@ -91,7 +95,9 @@ class InfoForm extends Component {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="phone-number">Phone Number</label>
+          <label className="form-label" htmlFor="phone-number">
+            Phone Number
+          </label>
           <input
             className="form-control"
             type="text"
@@ -101,10 +107,18 @@ class InfoForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="button" className="btn btn-warning" onClick={this.handleClick}>
+        <button
+          type="button"
+          className="btn btn-warning"
+          onClick={this.handleClick}
+        >
           Update
         </button>
-        <button type="button" className="btn btn-primary" onClick={this.props.toggleUpdater}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.props.toggleUpdater}
+        >
           Close
         </button>
       </form>
@@ -114,7 +128,7 @@ class InfoForm extends Component {
 
 InfoForm.propTypes = {
   onButtonClicked: PropTypes.func,
-  toggleUpdater: PropTypes.func
+  toggleUpdater: PropTypes.func,
 };
 
 export default InfoForm;

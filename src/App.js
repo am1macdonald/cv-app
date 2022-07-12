@@ -64,7 +64,7 @@ class App extends Component {
     this.setState({
       updateActive: !this.state.updateActive,
       experienceFormActive: false,
-      educationFormActive: false
+      educationFormActive: false,
     });
   }
 
@@ -84,7 +84,7 @@ class App extends Component {
     this.setState({
       updateActive: false,
       experienceFormActive: !this.state.experienceFormActive,
-      educationFormActive: false
+      educationFormActive: false,
     });
   }
 
