@@ -24,7 +24,7 @@ class App extends Component {
           titleOfStudy: "Degree",
           graduationDate: "2015-02-01",
           gpa: "3.7",
-          id: uniqid()
+          id: uniqid(),
         },
       ],
       experience: [
@@ -42,7 +42,8 @@ class App extends Component {
     this.updateInfo = this.updateInfo.bind(this);
     this.addExperience = this.addExperience.bind(this);
     this.addEducation = this.addEducation.bind(this);
-    this.deleteEducation = this.deleteEducation.bind(this)
+    this.deleteEducation = this.deleteEducation.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this)
   }
 
   updateInfo(obj) {
@@ -51,7 +52,7 @@ class App extends Component {
         name: obj.name,
         email: obj.email,
         phoneNumber: obj.phoneNumber,
-      }
+      },
     });
   }
 
@@ -61,13 +62,11 @@ class App extends Component {
     });
   }
   deleteExperience(key) {
-    const filteredExperience = this.state.experience.filter(exp => {
-      console.log(exp, key)
-    })
     this.setState({
-      experience: filteredExperience
-
-    })
+      experience: this.state.experience.filter((exp) => {
+        return exp.id !== key;
+      }),
+    });
   }
 
   addEducation(obj) {
@@ -77,11 +76,10 @@ class App extends Component {
   }
   deleteEducation(key) {
     this.setState({
-      education: this.state.education.filter(edu => {
+      education: this.state.education.filter((edu) => {
         return edu.id !== key;
-      })
-    })
-    
+      }),
+    });
   }
 
   render() {
@@ -90,9 +88,12 @@ class App extends Component {
         <h1>Resume Generator</h1>
         <InfoDisplay personalInfo={this.state.personalInfo} />
         <InfoForm onButtonClicked={this.updateInfo} />
-        <EducationDisplay education={this.state.education} delete={this.deleteEducation} />
+        <EducationDisplay
+          education={this.state.education}
+          delete={this.deleteEducation}
+        />
         <EducationForm onButtonClicked={this.addEducation} />
-        <ExperienceDisplay experiences={this.state.experience} />
+        <ExperienceDisplay experiences={this.state.experience} delete={this.deleteExperience} />
         <ExperienceForm onButtonClicked={this.addExperience} />
       </div>
     );
