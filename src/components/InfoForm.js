@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
 import PropTypes from "prop-types";
+// import bootstrap from 'bootstrap'
 
 class InfoForm extends Component {
   constructor(props) {
@@ -65,9 +66,9 @@ class InfoForm extends Component {
 
   render() {
     return (
-      <form action="">
-        <div>
-          <label htmlFor="name">Name: </label>
+      <form>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="name">Name: </label>
           <input
             type="text"
             name="name"
@@ -76,8 +77,8 @@ class InfoForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="email">Email: </label>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="email">Email: </label>
           <input
             type="email"
             name="email"
@@ -86,8 +87,8 @@ class InfoForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="phone-number">Phone Number: </label>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="phone-number">Phone Number: </label>
           <input
             type="text"
             name="phoneNumber"
@@ -96,7 +97,7 @@ class InfoForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit" onClick={this.handleClick}>
+        <button type="button" className="btn btn-primary" onClick={this.handleClick}>
           Submit
         </button>
       </form>
