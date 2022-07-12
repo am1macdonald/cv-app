@@ -5,8 +5,8 @@ function ExperienceDisplay(props) {
   const experienceArray = props.experiences;
 
   const handleEdit = () => {
-    return 
-  }
+    return;
+  };
 
   const experienceNodes = experienceArray.map((exp) => {
     return (
@@ -22,8 +22,18 @@ function ExperienceDisplay(props) {
 
           <p>End Date: {exp.endDate}</p>
         </div>
-        <input type="button" className="btn btn-danger" value="delete" onClick={() => props.delete(exp.id)}/>
-        <input type="button" className ="btn btn-warning" value="edit" onClick={handleEdit}/>
+        <input
+          type="button"
+          className="btn btn-danger"
+          value="delete"
+          onClick={() => props.delete(exp.id)}
+        />
+        <input
+          type="button"
+          className="btn btn-warning"
+          value="edit"
+          onClick={handleEdit}
+        />
       </li>
     );
   });
@@ -32,15 +42,16 @@ function ExperienceDisplay(props) {
     <div className="container-sm">
       <h2>Experience:</h2>
       <ul>{experienceNodes}</ul>
+      <button className="btn btn-primary" type="button">
+        Add Experience
+      </button>
     </div>
   );
 }
 
 ExperienceDisplay.propTypes = {
   experiences: PropTypes.array,
-  delete: PropTypes.func
+  delete: PropTypes.func,
 };
-
-
 
 export default ExperienceDisplay;

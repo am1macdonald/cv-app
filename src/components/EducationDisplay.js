@@ -5,8 +5,8 @@ function EducationDisplay(props) {
   const eduArray = props.education;
 
   const handleEdit = () => {
-    console.log('edit')
-  }
+    console.log("edit");
+  };
   const eduNodes = eduArray.map((edu) => {
     return (
       <li key={edu.id}>
@@ -21,8 +21,18 @@ function EducationDisplay(props) {
 
           <p>GPA: {edu.gpa}</p>
         </div>
-        <input type="button" className="btn btn-danger" value="delete" onClick={() => props.delete(edu.id)}/>
-        <input type="button" className="btn btn-warning" value="edit" onClick={handleEdit}/>
+        <input
+          type="button"
+          className="btn btn-danger"
+          value="delete"
+          onClick={() => props.delete(edu.id)}
+        />
+        <input
+          type="button"
+          className="btn btn-warning"
+          value="edit"
+          onClick={handleEdit}
+        />
       </li>
     );
   });
@@ -31,13 +41,21 @@ function EducationDisplay(props) {
     <div className="container-sm">
       <h2>Education:</h2>
       <ul>{eduNodes}</ul>
+      <button
+        className="btn btn-primary"
+        type="button"
+        onClick={props.toggleAdder}
+      >
+        Add Education
+      </button>
     </div>
   );
 }
 
 EducationDisplay.propTypes = {
   education: PropTypes.array,
-  delete: PropTypes.func
+  delete: PropTypes.func,
+  toggleAdder: PropTypes.func,
 };
 
 export default EducationDisplay;
