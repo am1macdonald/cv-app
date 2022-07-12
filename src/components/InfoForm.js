@@ -54,6 +54,7 @@ class InfoForm extends Component {
         id: uniqid(),
       },
     });
+    this.props.toggleUpdater();
   }
 
   newInfo() {
@@ -66,7 +67,7 @@ class InfoForm extends Component {
 
   render() {
     return (
-      <form className="container-sm">
+      <form className="container-sm mb-5">
         <div className="mb-3">
           <label className="form-label" htmlFor="name">Name</label>
           <input
@@ -100,8 +101,11 @@ class InfoForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="button" className="btn btn-primary" onClick={this.handleClick}>
+        <button type="button" className="btn btn-warning" onClick={this.handleClick}>
           Update
+        </button>
+        <button type="button" className="btn btn-primary" onClick={this.props.toggleUpdater}>
+          Close
         </button>
       </form>
     );
@@ -110,6 +114,7 @@ class InfoForm extends Component {
 
 InfoForm.propTypes = {
   onButtonClicked: PropTypes.func,
+  toggleUpdater: PropTypes.func
 };
 
 export default InfoForm;

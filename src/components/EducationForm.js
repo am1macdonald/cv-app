@@ -75,7 +75,7 @@ class EducationForm extends Component {
 
   render() {
     return (
-      <form className="container-sm">
+      <form className="container-sm mb-5">
         <div className="mb-3">
           <label htmlFor="school-name">School Name: </label>
           <input

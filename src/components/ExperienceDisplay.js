@@ -23,19 +23,21 @@ function ExperienceDisplay(props) {
           <dt className="col-sm-4">End date:</dt>
           <dd className="col-sm-8">{exp.endDate}</dd>
         </dl>
-
-        <input
-          type="button"
-          className="btn btn-danger"
-          value="delete"
-          onClick={() => props.delete(exp.id)}
-        />
-        <input
-          type="button"
-          className="btn btn-warning"
-          value="edit"
-          onClick={handleEdit}
-        />
+        <div className="row">
+          <input
+            type="button"
+            className="btn btn-danger col-sm-2"
+            value="Delete"
+            onClick={() => props.delete(exp.id)}
+          />
+          <span className="col-sm-auto"></span>
+          <input
+            type="button"
+            className="btn btn-warning col-sm-2"
+            value="Edit"
+            onClick={handleEdit}
+          />
+        </div>
       </li>
     );
   });

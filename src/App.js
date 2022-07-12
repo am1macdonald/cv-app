@@ -63,6 +63,8 @@ class App extends Component {
   toggleUpdater() {
     this.setState({
       updateActive: !this.state.updateActive,
+      experienceFormActive: false,
+      educationFormActive: false
     });
   }
 
@@ -80,7 +82,9 @@ class App extends Component {
   }
   toggleExperienceForm() {
     this.setState({
+      updateActive: false,
       experienceFormActive: !this.state.experienceFormActive,
+      educationFormActive: false
     });
   }
 
@@ -98,6 +102,8 @@ class App extends Component {
   }
   toggleEducationForm() {
     this.setState({
+      updateActive: false,
+      experienceFormActive: false,
       educationFormActive: !this.state.educationFormActive,
     });
   }
@@ -107,15 +113,19 @@ class App extends Component {
       <div className="main">
         <div className="container">
           <nav className="navbar navbar-expand-lg bg-light">
-            <span className="navbar-brand mb-0 h1">Resume Generator</span>
+            <span className="navbar-brand mx-auto h1">Resume Generator</span>
           </nav>
         </div>
         <InfoDisplay
           personalInfo={this.state.personalInfo}
           toggleUpdater={this.toggleUpdater}
+          formActive={this.state.updateActive}
         />
         {this.state.updateActive && (
-          <InfoForm onButtonClicked={this.updateInfo} />
+          <InfoForm
+            onButtonClicked={this.updateInfo}
+            toggleUpdater={this.toggleUpdater}
+          />
         )}
         <EducationDisplay
           education={this.state.education}

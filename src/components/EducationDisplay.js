@@ -20,18 +20,21 @@ function EducationDisplay(props) {
           <dt className="col-sm-4">GPA:</dt>
           <dd className="col-sm-8">{edu.gpa}</dd>
         </dl>
-        <input
-          type="button"
-          className="btn btn-danger"
-          value="delete"
-          onClick={() => props.delete(edu.id)}
-        />
-        <input
-          type="button"
-          className="btn btn-warning"
-          value="edit"
-          onClick={handleEdit}
-        />
+        <div className="row">
+          <input
+            type="button"
+            className="btn btn-danger mr-2 col-sm-2"
+            value="Delete"
+            onClick={() => props.delete(edu.id)}
+          />
+          <span className="col-sm-auto"></span>
+          <input
+            type="button"
+            className="btn btn-warning col-sm-2"
+            value="Edit"
+            onClick={handleEdit}
+          />
+        </div>
       </li>
     );
   });

@@ -24,16 +24,18 @@ class InfoDisplay extends Component {
           <p>Email: {this.props.personalInfo.email}</p>
           <p>Phone Number: {this.props.personalInfo.phoneNumber}</p>
         </div>
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={() => {
-            this.props.toggleUpdater();
-            this.toggleUpdating();
-          }}
-        >
-          {this.state.updating ? "Close" : "Edit"}
-        </button>
+        {!this.props.formActive && (
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => {
+              this.props.toggleUpdater();
+              this.toggleUpdating();
+            }}
+          >
+            Edit
+          </button>
+        )}
       </div>
     );
   }
@@ -42,6 +44,7 @@ class InfoDisplay extends Component {
 InfoDisplay.propTypes = {
   personalInfo: PropTypes.object,
   toggleUpdater: PropTypes.func,
+  formActive: PropTypes.bool,
 };
 
 export default InfoDisplay;

@@ -85,7 +85,7 @@ class ExperienceForm extends Component {
 
   render() {
     return (
-      <form className="container-sm">
+      <form className="container-sm mb-1">
         <div className="mb-3">
           <label htmlFor="company-name">Company Name: </label>
           <input
