@@ -113,7 +113,7 @@ class App extends Component {
       <div className="main">
         <div className="container">
           <nav className="navbar navbar-expand-lg bg-light">
-            <span className="navbar-brand mx-auto h1">Resume Generator</span>
+            <span className="navbar-brand mx-auto display-1">Resume Generator</span>
           </nav>
         </div>
         <InfoDisplay

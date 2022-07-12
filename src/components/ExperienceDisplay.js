@@ -10,9 +10,8 @@ function ExperienceDisplay(props) {
 
   const experienceNodes = experienceArray.map((exp) => {
     return (
-      <li key={exp.id}>
+      <li key={exp.id} className="list-group-item">
         <h5>{exp.positionTitle}</h5>
-
         <dl className="row">
           <dt className="col-sm-4">Company:</dt>
           <dd className="col-sm-8">{exp.companyName}</dd>
@@ -26,16 +25,16 @@ function ExperienceDisplay(props) {
         <div className="row">
           <input
             type="button"
-            className="btn btn-danger col-sm-2"
-            value="Delete"
-            onClick={() => props.delete(exp.id)}
+            className="btn btn-secondary col-sm-2"
+            value="Edit"
+            onClick={handleEdit}
           />
           <span className="col-sm-auto"></span>
           <input
             type="button"
-            className="btn btn-warning col-sm-2"
-            value="Edit"
-            onClick={handleEdit}
+            className="btn btn-danger col-sm-2"
+            value="Delete"
+            onClick={() => props.delete(exp.id)}
           />
         </div>
       </li>
@@ -45,7 +44,7 @@ function ExperienceDisplay(props) {
   return (
     <div className="container-sm">
       <h4>Experience:</h4>
-      <ul className="list-unstyled">{experienceNodes}</ul>
+      <ul className="list-group list-group-flush">{experienceNodes}</ul>
       {!props.formActive && (
         <button
           className="btn btn-primary"

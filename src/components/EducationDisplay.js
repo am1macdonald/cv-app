@@ -9,7 +9,7 @@ function EducationDisplay(props) {
   };
   const eduNodes = eduArray.map((edu) => {
     return (
-      <li key={edu.id}>
+      <li key={edu.id} className="list-group-item">
         <h5>{edu.titleOfStudy}</h5>
 
         <dl className="row">
@@ -23,16 +23,16 @@ function EducationDisplay(props) {
         <div className="row">
           <input
             type="button"
-            className="btn btn-danger mr-2 col-sm-2"
-            value="Delete"
-            onClick={() => props.delete(edu.id)}
+            className="btn btn-secondary col-sm-2"
+            value="Edit"
+            onClick={handleEdit}
           />
           <span className="col-sm-auto"></span>
           <input
             type="button"
-            className="btn btn-warning col-sm-2"
-            value="Edit"
-            onClick={handleEdit}
+            className="btn btn-danger mr-2 col-sm-2"
+            value="Delete"
+            onClick={() => props.delete(edu.id)}
           />
         </div>
       </li>
@@ -40,9 +40,9 @@ function EducationDisplay(props) {
   });
 
   return (
-    <div className="container-sm">
+    <div className="container-sm mb-5">
       <h4>Education:</h4>
-      <ul className="list-unstyled">{eduNodes}</ul>
+      <ul className="list-group list-group-flush">{eduNodes}</ul>
       {!props.formActive && (
         <button
           className="btn btn-primary"
