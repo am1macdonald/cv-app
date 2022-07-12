@@ -27,12 +27,7 @@ class App extends Component {
           id: uniqid()
         },
       ],
-      // format //
-      /* {
-        schoolName: "",
-        titleOfStudy: "",
-        dateOfStudy: ""
-      }*/ experience: [
+      experience: [
         {
           companyName: "Place 1",
           positionTitle: "Jobby 1",
@@ -47,6 +42,7 @@ class App extends Component {
     this.updateInfo = this.updateInfo.bind(this);
     this.addExperience = this.addExperience.bind(this);
     this.addEducation = this.addEducation.bind(this);
+    this.deleteEducation = this.deleteEducation.bind(this)
   }
 
   updateInfo(obj) {
@@ -64,23 +60,40 @@ class App extends Component {
       experience: [...this.state.experience, obj],
     });
   }
+  deleteExperience(key) {
+    const filteredExperience = this.state.experience.filter(exp => {
+      console.log(exp, key)
+    })
+    this.setState({
+      experience: filteredExperience
+
+    })
+  }
 
   addEducation(obj) {
     this.setState({
       education: [...this.state.education, obj],
     });
   }
+  deleteEducation(key) {
+    this.setState({
+      education: this.state.education.filter(edu => {
+        return edu.id !== key;
+      })
+    })
+    
+  }
 
   render() {
     return (
       <div className="main">
         <h1>Resume Generator</h1>
-        <InfoForm onButtonClicked={this.updateInfo} />
-        <EducationForm onButtonClicked={this.addEducation} />
-        <ExperienceForm onButtonClicked={this.addExperience} />
         <InfoDisplay personalInfo={this.state.personalInfo} />
+        <InfoForm onButtonClicked={this.updateInfo} />
+        <EducationDisplay education={this.state.education} delete={this.deleteEducation} />
+        <EducationForm onButtonClicked={this.addEducation} />
         <ExperienceDisplay experiences={this.state.experience} />
-        <EducationDisplay education={this.state.education} />
+        <ExperienceForm onButtonClicked={this.addExperience} />
       </div>
     );
   }

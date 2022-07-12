@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 function EducationDisplay(props) {
   const eduArray = props.education;
 
+  const handleEdit = () => {
+    console.log('edit')
+  }
   const eduNodes = eduArray.map((edu) => {
     return (
       <li key={edu.id}>
@@ -18,6 +21,8 @@ function EducationDisplay(props) {
 
           <p>GPA: {edu.gpa}</p>
         </div>
+        <input type="button" value="delete" onClick={() => props.delete(edu.id)}/>
+        <input type="button" value="edit" onClick={handleEdit}/>
       </li>
     );
   });
@@ -32,6 +37,7 @@ function EducationDisplay(props) {
 
 EducationDisplay.propTypes = {
   education: PropTypes.array,
+  delete: PropTypes.func
 };
 
 export default EducationDisplay;
