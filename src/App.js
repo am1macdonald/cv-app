@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import "./app.css";
+import uniqid from "uniqid";
 import EducationForm from "./components/EducationForm";
 import ExperienceForm from "./components/ExperienceForm";
 import InfoForm from "./components/InfoForm";
 import InfoDisplay from "./components/InfoDisplay";
 import ExperienceDisplay from "./components/ExperienceDisplay";
-import uniqid from "uniqid";
 import EducationDisplay from "./components/EducationDisplay";
 
 class App extends Component {
