@@ -66,10 +66,11 @@ class InfoForm extends Component {
 
   render() {
     return (
-      <form>
+      <form className="container-sm">
         <div className="mb-3">
-          <label className="form-label" htmlFor="name">Name: </label>
+          <label className="form-label" htmlFor="name">Name</label>
           <input
+            className="form-control"
             type="text"
             name="name"
             id="name"
@@ -78,8 +79,9 @@ class InfoForm extends Component {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="email">Email: </label>
+          <label className="form-label" htmlFor="email">Email</label>
           <input
+            className="form-control"
             type="email"
             name="email"
             id="email"
@@ -88,8 +90,9 @@ class InfoForm extends Component {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="phone-number">Phone Number: </label>
+          <label className="form-label" htmlFor="phone-number">Phone Number</label>
           <input
+            className="form-control"
             type="text"
             name="phoneNumber"
             id="phone-number"

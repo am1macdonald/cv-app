@@ -22,8 +22,8 @@ function ExperienceDisplay(props) {
 
           <p>End Date: {exp.endDate}</p>
         </div>
-        <input type="button" value="delete" onClick={() => props.delete(exp.id)}/>
-        <input type="button" value="edit" onClick={handleEdit}/>
+        <input type="button" className="btn btn-danger" value="delete" onClick={() => props.delete(exp.id)}/>
+        <input type="button" className ="btn btn-warning" value="edit" onClick={handleEdit}/>
       </li>
     );
   });

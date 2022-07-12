@@ -74,10 +74,11 @@ class EducationForm extends Component {
 
   render() {
     return (
-      <form action="">
-        <div>
+      <form className="container-sm">
+        <div className="mb-3">
           <label htmlFor="school-name">School Name: </label>
           <input
+            className="form-control"
             type="text"
             name="schoolName"
             id="school-name"
@@ -85,9 +86,10 @@ class EducationForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="title-of-study">Title of Studies: </label>
           <input
+            className="form-control"
             type="text"
             name="titleOfStudy"
             id="title-of-study"
@@ -95,9 +97,10 @@ class EducationForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="graduationDate">Date of Studies: </label>
           <input
+            className="form-control"
             type="text"
             name="graduationDate"
             id="graduationDate"
@@ -105,9 +108,10 @@ class EducationForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="gpa">GPA: </label>
           <input
+            className="form-control"
             type="text"
             name="gpa"
             id="gpa"
@@ -115,7 +119,7 @@ class EducationForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit" onClick={this.handleClick}>
+        <button type="button" className="btn btn-primary" onClick={this.handleClick}>
           Submit
         </button>
       </form>

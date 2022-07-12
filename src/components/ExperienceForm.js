@@ -84,10 +84,11 @@ class ExperienceForm extends Component {
 
   render() {
     return (
-      <form action="">
-        <div>
+      <form className="container-sm">
+        <div className="mb-3">
           <label htmlFor="company-name">Company Name: </label>
           <input
+            className="form-control"
             type="text"
             name="companyName"
             id="company-name"
@@ -95,9 +96,10 @@ class ExperienceForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="position-title">Position Title: </label>
           <input
+            className="form-control"
             type="text"
             name="positionTitle"
             id="position-title"
@@ -105,9 +107,10 @@ class ExperienceForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="duties">Duties: </label>
           <input
+            className="form-control"
             type="text"
             name="duties"
             id="duties"
@@ -115,9 +118,10 @@ class ExperienceForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="start-of-employment">Start of Employment: </label>
           <input
+            className="form-control"
             type="date"
             name="startDate"
             id="start-of-employment"
@@ -126,9 +130,10 @@ class ExperienceForm extends Component {
             max={new Date().toLocaleDateString("en-ca")}
           />
         </div>
-        <div>
+        <div className="mb-3">
           <label htmlFor="end-of-employment">End of Employment: </label>
           <input
+            className="form-control"
             type="date"
             name="endDate"
             id="end-of-employment"
@@ -137,7 +142,7 @@ class ExperienceForm extends Component {
             max={new Date().toLocaleDateString("en-ca")}
           />
         </div>
-        <button type="submit" onClick={this.handleClick}>
+        <button type="button" className="btn btn-primary" onClick={this.handleClick}>
           Submit
         </button>
       </form>
