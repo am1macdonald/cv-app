@@ -11,17 +11,19 @@ function ExperienceDisplay(props) {
   const experienceNodes = experienceArray.map((exp) => {
     return (
       <li key={exp.id}>
-        <h3>{exp.companyName}</h3>
+        <h5>{exp.positionTitle}</h5>
 
-        <div>
-          <p>Position: {exp.positionTitle}</p>
+        <dl className="row">
+          <dt className="col-sm-4">Company:</dt>
+          <dd className="col-sm-8">{exp.companyName}</dd>
+          <dt className="col-sm-4">Description of Duties:</dt>
+          <dd className="col-sm-8">{exp.duties}</dd>
+          <dt className="col-sm-4">Start date:</dt>
+          <dd className="col-sm-8">{exp.startDate}</dd>
+          <dt className="col-sm-4">End date:</dt>
+          <dd className="col-sm-8">{exp.endDate}</dd>
+        </dl>
 
-          <p>Description of Duties: {exp.duties}</p>
-
-          <p>Start Date: {exp.startDate}</p>
-
-          <p>End Date: {exp.endDate}</p>
-        </div>
         <input
           type="button"
           className="btn btn-danger"
@@ -40,18 +42,26 @@ function ExperienceDisplay(props) {
 
   return (
     <div className="container-sm">
-      <h2>Experience:</h2>
-      <ul>{experienceNodes}</ul>
-      <button className="btn btn-primary" type="button">
-        Add Experience
-      </button>
+      <h4>Experience:</h4>
+      <ul className="list-unstyled">{experienceNodes}</ul>
+      {!props.formActive && (
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={props.toggleAdder}
+        >
+          Add Experience
+        </button>
+      )}
     </div>
   );
 }
 
 ExperienceDisplay.propTypes = {
   experiences: PropTypes.array,
+  formActive: PropTypes.bool,
   delete: PropTypes.func,
+  toggleAdder: PropTypes.func,
 };
 
 export default ExperienceDisplay;

@@ -10,17 +10,16 @@ function EducationDisplay(props) {
   const eduNodes = eduArray.map((edu) => {
     return (
       <li key={edu.id}>
-        <h3>{edu.schoolName}</h3>
+        <h5>{edu.titleOfStudy}</h5>
 
-        <div>
-          <p>School Name: {edu.schoolName}</p>
-
-          <p>Title of Study: {edu.titleOfStudy}</p>
-
-          <p>Graduation Date: {edu.graduationDate}</p>
-
-          <p>GPA: {edu.gpa}</p>
-        </div>
+        <dl className="row">
+          <dt className="col-sm-4">School Name:</dt>
+          <dd className="col-sm-8">{edu.schoolName}</dd>
+          <dt className="col-sm-4">Graduation Date:</dt>
+          <dd className="col-sm-8">{edu.graduationDate}</dd>
+          <dt className="col-sm-4">GPA:</dt>
+          <dd className="col-sm-8">{edu.gpa}</dd>
+        </dl>
         <input
           type="button"
           className="btn btn-danger"
@@ -39,8 +38,8 @@ function EducationDisplay(props) {
 
   return (
     <div className="container-sm">
-      <h2>Education:</h2>
-      <ul>{eduNodes}</ul>
+      <h4>Education:</h4>
+      <ul className="list-unstyled">{eduNodes}</ul>
       {!props.formActive && (
         <button
           className="btn btn-primary"
@@ -58,7 +57,7 @@ EducationDisplay.propTypes = {
   education: PropTypes.array,
   delete: PropTypes.func,
   toggleAdder: PropTypes.func,
-  formActive: PropTypes.bool
+  formActive: PropTypes.bool,
 };
 
 export default EducationDisplay;

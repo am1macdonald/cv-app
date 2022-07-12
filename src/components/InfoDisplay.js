@@ -18,7 +18,7 @@ class InfoDisplay extends Component {
   render() {
     return (
       <div className="container-sm">
-        <h2>Contact Information:</h2>
+        <h4>Contact Information:</h4>
         <div>
           <p>Name: {this.props.personalInfo.name}</p>
           <p>Email: {this.props.personalInfo.email}</p>

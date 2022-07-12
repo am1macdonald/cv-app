@@ -60,6 +60,7 @@ class ExperienceForm extends Component {
         id: uniqid(),
       },
     });
+    this.props.toggleAdder();
   }
   handleChange(e) {
     e.preventDefault();
@@ -142,7 +143,11 @@ class ExperienceForm extends Component {
             max={new Date().toLocaleDateString("en-ca")}
           />
         </div>
-        <button type="button" className="btn btn-primary" onClick={this.handleClick}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={this.handleClick}
+        >
           Add
         </button>
       </form>
@@ -152,6 +157,7 @@ class ExperienceForm extends Component {
 
 ExperienceForm.propTypes = {
   onButtonClicked: PropTypes.func,
+  toggleAdder: PropTypes.func,
 };
 
 export default ExperienceForm;
