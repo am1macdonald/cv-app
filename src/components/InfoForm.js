@@ -101,7 +101,7 @@ class InfoForm extends Component {
           />
         </div>
         <button type="button" className="btn btn-primary" onClick={this.handleClick}>
-          Submit
+          Update
         </button>
       </form>
     );

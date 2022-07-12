@@ -29,7 +29,7 @@ function ExperienceDisplay(props) {
   });
 
   return (
-    <div>
+    <div className="container-sm">
       <h2>Experience:</h2>
       <ul>{experienceNodes}</ul>
     </div>

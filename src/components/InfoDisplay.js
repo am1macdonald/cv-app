@@ -9,7 +9,7 @@ constructor(props){
 
 render() {
   return (
-    <div>
+    <div className="container-sm">
       <h2>Contact Information:</h2>
       <div>
         <p>Name: {this.props.personalInfo.name}</p>

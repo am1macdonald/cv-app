@@ -143,7 +143,7 @@ class ExperienceForm extends Component {
           />
         </div>
         <button type="button" className="btn btn-primary" onClick={this.handleClick}>
-          Submit
+          Add
         </button>
       </form>
     );

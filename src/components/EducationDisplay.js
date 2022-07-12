@@ -28,7 +28,7 @@ function EducationDisplay(props) {
   });
 
   return (
-    <div>
+    <div className="container-sm">
       <h2>Education:</h2>
       <ul>{eduNodes}</ul>
     </div>

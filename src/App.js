@@ -13,8 +13,8 @@ class App extends Component {
 
     this.state = {
       personalInfo: {
-        name: "Arse",
-        email: "hole@mail.org",
+        name: "Joe",
+        email: "joe@mail.org",
         phoneNumber: "234.234.2344",
       },
       education: [
@@ -84,7 +84,11 @@ class App extends Component {
   render() {
     return (
       <div className="main">
-        <h1>Resume Generator</h1>
+        <div className="container-sm">
+          <nav className="navbar navbar-expand-lg bg-light">
+            <span className="navbar-brand mb-0 h1">Resume Generator</span>
+          </nav>
+        </div>
         <InfoDisplay personalInfo={this.state.personalInfo} />
         <InfoForm onButtonClicked={this.updateInfo} />
         <EducationDisplay
