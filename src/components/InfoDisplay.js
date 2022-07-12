@@ -1,29 +1,47 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 class InfoDisplay extends Component {
-constructor(props){
+  constructor(props) {
+    super(props);
+    this.state = {
+      updating: false,
+    };
+  }
 
-  super(props);
-}
+  toggleUpdating() {
+    this.setState({
+      updating: !this.state.updating,
+    });
+  }
 
-render() {
-  return (
-    <div className="container-sm">
-      <h2>Contact Information:</h2>
-      <div>
-        <p>Name: {this.props.personalInfo.name}</p>
-        <p>Email: {this.props.personalInfo.email}</p>
-        <p>Phone Number: {this.props.personalInfo.phoneNumber}</p>
+  render() {
+    return (
+      <div className="container-sm">
+        <h2>Contact Information:</h2>
+        <div>
+          <p>Name: {this.props.personalInfo.name}</p>
+          <p>Email: {this.props.personalInfo.email}</p>
+          <p>Phone Number: {this.props.personalInfo.phoneNumber}</p>
+        </div>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => {
+            this.props.toggleUpdater();
+            this.toggleUpdating();
+          }}
+        >
+          {this.state.updating ? "Close" : "Edit"}
+        </button>
       </div>
-    </div>
-  )
-}
-
+    );
+  }
 }
 
 InfoDisplay.propTypes = {
-  personalInfo: PropTypes.object
-}
+  personalInfo: PropTypes.object,
+  toggleUpdater: PropTypes.func,
+};
 
-export default InfoDisplay
+export default InfoDisplay;

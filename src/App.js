@@ -36,6 +36,9 @@ class App extends Component {
           id: uniqid(),
         },
       ],
+      updateActive: false,
+      experienceFormActive: false,
+      educationFormActive: false,
     };
 
     this.updateInfo = this.updateInfo.bind(this);
@@ -43,6 +46,9 @@ class App extends Component {
     this.addEducation = this.addEducation.bind(this);
     this.deleteEducation = this.deleteEducation.bind(this);
     this.deleteExperience = this.deleteExperience.bind(this);
+    this.toggleUpdater = this.toggleUpdater.bind(this);
+    this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
+    this.toggleEducationForm = this.toggleEducationForm.bind(this);
   }
 
   updateInfo(obj) {
@@ -52,6 +58,11 @@ class App extends Component {
         email: obj.email,
         phoneNumber: obj.phoneNumber,
       },
+    });
+  }
+  toggleUpdater() {
+    this.setState({
+      updateActive: !this.state.updateActive,
     });
   }
 
@@ -67,6 +78,11 @@ class App extends Component {
       }),
     });
   }
+  toggleExperienceForm() {
+    this.setState({
+      experienceFormActive: !this.state.experienceFormActive,
+    });
+  }
 
   addEducation(obj) {
     this.setState({
@@ -80,6 +96,11 @@ class App extends Component {
       }),
     });
   }
+  toggleEducationForm() {
+    this.setState({
+      educationFormActive: !this.state.educationFormActive,
+    });
+  }
 
   render() {
     return (
@@ -89,18 +110,29 @@ class App extends Component {
             <span className="navbar-brand mb-0 h1">Resume Generator</span>
           </nav>
         </div>
-        <InfoDisplay personalInfo={this.state.personalInfo} />
-        <InfoForm onButtonClicked={this.updateInfo} />
+        <InfoDisplay
+          personalInfo={this.state.personalInfo}
+          toggleUpdater={this.toggleUpdater}
+        />
+        {this.state.updateActive && (
+          <InfoForm onButtonClicked={this.updateInfo} />
+        )}
         <EducationDisplay
           education={this.state.education}
           delete={this.deleteEducation}
+          toggleAdder={this.toggleEducationForm}
         />
-        <EducationForm onButtonClicked={this.addEducation} />
+        {this.state.educationFormActive && (
+          <EducationForm onButtonClicked={this.addEducation} />
+        )}
         <ExperienceDisplay
           experiences={this.state.experience}
           delete={this.deleteExperience}
+          toggleAdder={this.toggleExperienceForm}
         />
-        <ExperienceForm onButtonClicked={this.addExperience} />
+        {this.state.experienceFormActive && (
+          <ExperienceForm onButtonClicked={this.addExperience} />
+        )}
       </div>
     );
   }
