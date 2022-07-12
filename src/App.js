@@ -42,7 +42,7 @@ class App extends Component {
     this.addExperience = this.addExperience.bind(this);
     this.addEducation = this.addEducation.bind(this);
     this.deleteEducation = this.deleteEducation.bind(this);
-    this.deleteExperience = this.deleteExperience.bind(this)
+    this.deleteExperience = this.deleteExperience.bind(this);
   }
 
   updateInfo(obj) {
@@ -92,7 +92,10 @@ class App extends Component {
           delete={this.deleteEducation}
         />
         <EducationForm onButtonClicked={this.addEducation} />
-        <ExperienceDisplay experiences={this.state.experience} delete={this.deleteExperience} />
+        <ExperienceDisplay
+          experiences={this.state.experience}
+          delete={this.deleteExperience}
+        />
         <ExperienceForm onButtonClicked={this.addExperience} />
       </div>
     );
