@@ -33,7 +33,7 @@ class InfoDisplay extends Component {
               this.toggleUpdating();
             }}
           >
-            Edit
+            Edit Info
           </button>
         )}
       </div>
