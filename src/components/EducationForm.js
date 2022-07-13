@@ -120,13 +120,23 @@ class EducationForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.handleClick}
-        >
-          Add
-        </button>
+        <div className="row">
+          <button
+            type="button"
+            className="btn btn-primary col-sm-2"
+            onClick={this.handleClick}
+          >
+            Add
+          </button>
+          <span className="col-md-auto"></span>
+          <button
+            type="button"
+            className="btn btn-secondary col-sm-2"
+            onClick={this.props.toggleAdder}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     );
   }
