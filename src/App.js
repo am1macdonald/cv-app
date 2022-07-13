@@ -39,6 +39,7 @@ class App extends Component {
       updateActive: false,
       experienceFormActive: false,
       educationFormActive: false,
+      editing: false,
     };
 
     this.updateInfo = this.updateInfo.bind(this);
@@ -49,6 +50,7 @@ class App extends Component {
     this.toggleUpdater = this.toggleUpdater.bind(this);
     this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
     this.toggleEducationForm = this.toggleEducationForm.bind(this);
+    this.toggleEditing = this.toggleEditing.bind(this)
   }
 
   updateInfo(obj) {
@@ -67,7 +69,6 @@ class App extends Component {
       educationFormActive: false,
     });
   }
-
   addExperience(obj) {
     this.setState({
       experience: [...this.state.experience, obj],
@@ -87,7 +88,6 @@ class App extends Component {
       educationFormActive: false,
     });
   }
-
   addEducation(obj) {
     this.setState({
       education: [...this.state.education, obj],
@@ -107,13 +107,19 @@ class App extends Component {
       educationFormActive: !this.state.educationFormActive,
     });
   }
-
+  toggleEditing() {
+    this.setState({
+      editing: !this.state.editing,
+    });
+  }
   render() {
     return (
       <div className="main">
         <div className="container">
           <nav className="navbar navbar-expand-lg bg-light">
-            <span className="navbar-brand mx-auto display-1">Resume Generator</span>
+            <span className="navbar-brand mx-auto display-1">
+              Resume Generator
+            </span>
           </nav>
         </div>
         <InfoDisplay
@@ -125,6 +131,7 @@ class App extends Component {
           <InfoForm
             onButtonClicked={this.updateInfo}
             toggleUpdater={this.toggleUpdater}
+            personalInfo={this.state.personalInfo}
           />
         )}
         <EducationDisplay
@@ -132,6 +139,7 @@ class App extends Component {
           delete={this.deleteEducation}
           toggleAdder={this.toggleEducationForm}
           formActive={this.state.educationFormActive}
+          toggleEdits={this.state.toggleEdits}
         />
         {this.state.educationFormActive && (
           <EducationForm
@@ -144,6 +152,7 @@ class App extends Component {
           delete={this.deleteExperience}
           toggleAdder={this.toggleExperienceForm}
           formActive={this.state.experienceFormActive}
+          toggleEdits={this.state.toggleEdits}
         />
         {this.state.experienceFormActive && (
           <ExperienceForm
