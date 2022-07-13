@@ -107,20 +107,23 @@ class InfoForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button
-          type="button"
-          className="btn btn-warning"
-          onClick={this.handleClick}
-        >
-          Update
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={this.props.toggleUpdater}
-        >
-          Cancel
-        </button>
+        <div className="row">
+          <button
+            type="button"
+            className="btn btn-primary col-sm-2"
+            onClick={this.handleClick}
+          >
+            Update
+          </button>
+          <span className="col-md-auto"></span>
+          <button
+            type="button"
+            className="btn btn-secondary col-sm-2"
+            onClick={this.props.toggleUpdater}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     );
   }
