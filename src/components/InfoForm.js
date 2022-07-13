@@ -119,7 +119,7 @@ class InfoForm extends Component {
           className="btn btn-primary"
           onClick={this.props.toggleUpdater}
         >
-          Close
+          Cancel
         </button>
       </form>
     );
