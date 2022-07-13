@@ -50,10 +50,13 @@ class App extends Component {
     this.toggleUpdater = this.toggleUpdater.bind(this);
     this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
     this.toggleEducationForm = this.toggleEducationForm.bind(this);
-    this.toggleEditing = this.toggleEditing.bind(this)
+    this.toggleEditing = this.toggleEditing.bind(this);
   }
 
   updateInfo(obj) {
+    if (this.state.editing) {
+      return;
+    }
     this.setState({
       personalInfo: {
         name: obj.name,
@@ -70,6 +73,9 @@ class App extends Component {
     });
   }
   addExperience(obj) {
+    if (this.state.editing) {
+      return;
+    }
     this.setState({
       experience: [...this.state.experience, obj],
     });
@@ -82,6 +88,9 @@ class App extends Component {
     });
   }
   toggleExperienceForm() {
+    if (this.state.editing) {
+      return;
+    }
     this.setState({
       updateActive: false,
       experienceFormActive: !this.state.experienceFormActive,
@@ -101,6 +110,9 @@ class App extends Component {
     });
   }
   toggleEducationForm() {
+    if (this.state.editing) {
+      return;
+    }
     this.setState({
       updateActive: false,
       experienceFormActive: false,
