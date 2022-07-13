@@ -9,15 +9,17 @@ class InfoForm extends Component {
 
     this.state = {
       name: {
-        value: "",
+        value: this.props.personalInfo.name ? this.props.personalInfo.name : "",
         id: uniqid(),
       },
       email: {
-        value: "",
+        value: this.props.personalInfo ? this.props.personalInfo.email : "",
         id: uniqid(),
       },
       phoneNumber: {
-        value: "",
+        value: this.props.personalInfo
+          ? this.props.personalInfo.phoneNumber
+          : "",
         id: uniqid(),
       },
     };
@@ -100,11 +102,12 @@ class InfoForm extends Component {
           </label>
           <input
             className="form-control"
-            type="text"
+            type="tel"
             name="phoneNumber"
             id="phone-number"
             value={this.state.phoneNumber.value}
             onChange={this.handleChange}
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
           />
         </div>
         <div className="row">
@@ -132,6 +135,7 @@ class InfoForm extends Component {
 InfoForm.propTypes = {
   onButtonClicked: PropTypes.func,
   toggleUpdater: PropTypes.func,
+  personalInfo: PropTypes.object,
 };
 
 export default InfoForm;
