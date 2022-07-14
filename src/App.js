@@ -116,7 +116,6 @@ class App extends Component {
   }
 
   editEducation(obj) {
-    console.log(obj)
     this.setState({
       education: this.state.education.map((edu) => {
         if (edu.id === obj.id) {
@@ -140,8 +139,6 @@ class App extends Component {
     this.setState({
       editing: !this.state.editing,
     });
-
-    console.log("editing: ", this.state.editing);
   }
   render() {
     return (
