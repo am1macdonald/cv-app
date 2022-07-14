@@ -56,7 +56,7 @@ class InfoForm extends Component {
         id: uniqid(),
       },
     });
-    this.props.toggleUpdater();
+    this.props.toggleUpdateInfo();
   }
 
   newInfo() {
@@ -122,7 +122,7 @@ class InfoForm extends Component {
           <button
             type="button"
             className="btn btn-secondary col-sm-2"
-            onClick={this.props.toggleUpdater}
+            onClick={this.props.toggleUpdateInfo}
           >
             Cancel
           </button>
@@ -134,7 +134,7 @@ class InfoForm extends Component {
 
 InfoForm.propTypes = {
   onButtonClicked: PropTypes.func,
-  toggleUpdater: PropTypes.func,
+  toggleUpdateInfo: PropTypes.func,
   personalInfo: PropTypes.object,
 };
 

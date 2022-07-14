@@ -29,7 +29,7 @@ class InfoDisplay extends Component {
             className="btn btn-primary"
             type="button"
             onClick={() => {
-              this.props.toggleUpdater();
+              this.props.toggleUpdateInfo();
               this.toggleUpdating();
             }}
           >
@@ -43,7 +43,7 @@ class InfoDisplay extends Component {
 
 InfoDisplay.propTypes = {
   personalInfo: PropTypes.object,
-  toggleUpdater: PropTypes.func,
+  toggleUpdateInfo: PropTypes.func,
   formActive: PropTypes.bool,
 };
 
