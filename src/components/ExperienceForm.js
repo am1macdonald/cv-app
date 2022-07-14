@@ -112,7 +112,7 @@ class ExperienceForm extends Component {
           <label htmlFor="duties">Duties: </label>
           <input
             className="form-control"
-            type="text"
+            type="text-area"
             name="duties"
             id="duties"
             value={this.state.duties.value}
