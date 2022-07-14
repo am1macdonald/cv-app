@@ -1,162 +1,107 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import PropTypes from "prop-types";
 
-class EducationForm extends Component {
-  constructor(props) {
-    super(props);
+function EducationForm(props) {
+  const [schoolName, setSchoolName] = useState(
+    props.eduToEdit ? props.eduToEdit.schoolName : ""
+  );
+  const [titleOfStudy, setTitleOfStudy] = useState(
+    props.eduToEdit ? props.eduToEdit.titleOfStudy : ""
+  );
+  const [graduationDate, setGraduationDate] = useState(
+    props.eduToEdit ? props.eduToEdit.graduationDate : ""
+  );
+  const [gpa, setGpa] = useState(props.eduToEdit ? props.eduToEdit.gpa : "");
 
-    if (this.props.eduToEdit) {
-      this.state = {
-        schoolName: {
-          value: this.props.eduToEdit.schoolName,
-          id: uniqid(),
-        },
-        titleOfStudy: {
-          value: this.props.eduToEdit.titleOfStudy,
-          id: uniqid(),
-        },
-        graduationDate: {
-          value: this.props.eduToEdit.graduationDate,
-          id: uniqid(),
-        },
-        gpa: {
-          value: this.props.eduToEdit.gpa,
-          id: uniqid(),
-        },
-        id: {
-          value: this.props.eduToEdit.id,
-        },
-      };
-    } else {
-      this.state = {
-        schoolName: {
-          value: "",
-          id: uniqid(),
-        },
-        titleOfStudy: {
-          value: "",
-          id: uniqid(),
-        },
-        graduationDate: {
-          value: "",
-          id: uniqid(),
-        },
-        gpa: {
-          value: "",
-          id: uniqid(),
-        },
-      };
-    }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.newSchool = this.newSchool.bind(this);
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    if (this.props.editItem) {
-      this.props.updater(this.newSchool());
-
-      this.props.toggleEditItem();
-      return;
-    }
-    this.props.onButtonClicked(this.newSchool());
-
-    this.props.toggleAdder();
-  }
-  handleChange(e) {
-    e.preventDefault();
-    this.setState({
-      [e.target.name]: {
-        value: e.target.value,
-        id: this.state[e.target.name].id,
-      },
-    });
-  }
-
-  newSchool() {
+  function newSchool() {
     return {
-      schoolName: this.state.schoolName.value,
-      titleOfStudy: this.state.titleOfStudy.value,
-      graduationDate: this.state.graduationDate.value,
-      gpa: this.state.gpa.value,
-      id: this.state.id ? this.state.id.value : uniqid(),
+      schoolName: schoolName.value,
+      titleOfStudy: titleOfStudy.value,
+      graduationDate: graduationDate.value,
+      gpa: gpa.value,
+      id: props.eduToEdit ? props.eduToEdit.id : uniqid(),
     };
   }
 
-  render() {
-    return (
-      <form className="container-sm mb-5">
-        <div className="mb-3">
-          <label htmlFor="school-name">School Name: </label>
-          <input
-            className="form-control"
-            type="text"
-            name="schoolName"
-            id="school-name"
-            value={this.state.schoolName.value}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="title-of-study">Title of Studies: </label>
-          <input
-            className="form-control"
-            type="text"
-            name="titleOfStudy"
-            id="title-of-study"
-            value={this.state.titleOfStudy.value}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="graduationDate">Graduation Date: </label>
-          <input
-            className="form-control"
-            type="date"
-            name="graduationDate"
-            id="graduationDate"
-            value={this.state.graduationDate.value}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="gpa">GPA: </label>
-          <input
-            className="form-control"
-            type="text"
-            name="gpa"
-            id="gpa"
-            value={this.state.gpa.value}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="row">
-          <button
-            type="button"
-            className="btn btn-primary col-sm-2"
-            onClick={this.handleClick}
-          >
-            {this.props.editItem ? "Update" : "Add"}
-          </button>
-          <span className="col-md-auto"></span>
-          <button
-            type="button"
-            className="btn btn-secondary col-sm-2"
-            onClick={
-              this.props.editItem
-                ? this.props.toggleEditItem
-                : this.props.toggleAdder
-            }
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    );
+  function handleClick(e) {
+    e.preventDefault();
+
+    if (props.editItem) {
+      props.updater(newSchool());
+      props.toggleEditItem();
+      return;
+    }
+
+    props.onButtonClicked(newSchool());
+    props.toggleAdder();
   }
+
+  return (
+    <form className="container-sm mb-5">
+      <div className="mb-3">
+        <label htmlFor="school-name">School Name: </label>
+        <input
+          className="form-control"
+          type="text"
+          name="schoolName"
+          id="school-name"
+          value={schoolName}
+          onChange={(e) => setSchoolName(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="title-of-study">Title of Studies: </label>
+        <input
+          className="form-control"
+          type="text"
+          name="titleOfStudy"
+          id="title-of-study"
+          value={titleOfStudy}
+          onChange={(e) => setTitleOfStudy(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="graduationDate">Graduation Date: </label>
+        <input
+          className="form-control"
+          type="date"
+          name="graduationDate"
+          id="graduationDate"
+          value={graduationDate}
+          onChange={(e) => setGraduationDate(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="gpa">GPA: </label>
+        <input
+          className="form-control"
+          type="text"
+          name="gpa"
+          id="gpa"
+          value={gpa}
+          onChange={(e) => setGpa(e.target.value)}
+        />
+      </div>
+      <div className="row">
+        <button
+          type="button"
+          className="btn btn-primary col-sm-2"
+          onClick={handleClick}
+        >
+          {props.editItem ? "Update" : "Add"}
+        </button>
+        <span className="col-md-auto"></span>
+        <button
+          type="button"
+          className="btn btn-secondary col-sm-2"
+          onClick={props.editItem ? props.toggleEditItem : props.toggleAdder}
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
 }
 
 EducationForm.propTypes = {
