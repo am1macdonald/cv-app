@@ -43,13 +43,18 @@ class App extends Component {
     };
 
     this.updateInfo = this.updateInfo.bind(this);
-    this.addExperience = this.addExperience.bind(this);
+    this.toggleUpdateInfo = this.toggleUpdateInfo.bind(this);
+
     this.addEducation = this.addEducation.bind(this);
-    this.deleteEducation = this.deleteEducation.bind(this);
-    this.deleteExperience = this.deleteExperience.bind(this);
-    this.toggleUpdater = this.toggleUpdater.bind(this);
-    this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
     this.toggleEducationForm = this.toggleEducationForm.bind(this);
+    this.deleteEducation = this.deleteEducation.bind(this);
+    this.editEducation = this.editEducation.bind(this);
+
+    this.addExperience = this.addExperience.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
+
+    this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
+
     this.toggleEditing = this.toggleEditing.bind(this);
   }
 
@@ -65,7 +70,7 @@ class App extends Component {
       },
     });
   }
-  toggleUpdater() {
+  toggleUpdateInfo() {
     this.setState({
       updateActive: !this.state.updateActive,
       experienceFormActive: false,
@@ -109,6 +114,18 @@ class App extends Component {
       }),
     });
   }
+
+  editEducation(obj) {
+    console.log(obj)
+    this.setState({
+      education: this.state.education.map((edu) => {
+        if (edu.id === obj.id) {
+          return obj;
+        }
+        return edu;
+      })
+    });
+  }
   toggleEducationForm() {
     if (this.state.editing) {
       return;
@@ -123,6 +140,8 @@ class App extends Component {
     this.setState({
       editing: !this.state.editing,
     });
+
+    console.log("editing: ", this.state.editing);
   }
   render() {
     return (
@@ -136,13 +155,13 @@ class App extends Component {
         </div>
         <InfoDisplay
           personalInfo={this.state.personalInfo}
-          toggleUpdater={this.toggleUpdater}
+          toggleUpdateInfo={this.toggleUpdateInfo}
           formActive={this.state.updateActive}
         />
         {this.state.updateActive && (
           <InfoForm
             onButtonClicked={this.updateInfo}
-            toggleUpdater={this.toggleUpdater}
+            toggleUpdateInfo={this.toggleUpdateInfo}
             personalInfo={this.state.personalInfo}
           />
         )}
@@ -151,7 +170,9 @@ class App extends Component {
           delete={this.deleteEducation}
           toggleAdder={this.toggleEducationForm}
           formActive={this.state.educationFormActive}
-          toggleEdits={this.state.toggleEdits}
+          editing={this.state.editing}
+          toggleEditing={this.toggleEditing}
+          updater={this.editEducation}
         />
         {this.state.educationFormActive && (
           <EducationForm
@@ -164,7 +185,7 @@ class App extends Component {
           delete={this.deleteExperience}
           toggleAdder={this.toggleExperienceForm}
           formActive={this.state.experienceFormActive}
-          toggleEdits={this.state.toggleEdits}
+          toggleEditing={this.toggleEditing}
         />
         {this.state.experienceFormActive && (
           <ExperienceForm

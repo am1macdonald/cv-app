@@ -6,24 +6,48 @@ class EducationForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      schoolName: {
-        value: "",
-        id: uniqid(),
-      },
-      titleOfStudy: {
-        value: "",
-        id: uniqid(),
-      },
-      graduationDate: {
-        value: "",
-        id: uniqid(),
-      },
-      gpa: {
-        value: "",
-        id: uniqid(),
-      },
-    };
+    if (this.props.eduToEdit) {
+      this.state = {
+        schoolName: {
+          value: this.props.eduToEdit.schoolName,
+          id: uniqid(),
+        },
+        titleOfStudy: {
+          value: this.props.eduToEdit.titleOfStudy,
+          id: uniqid(),
+        },
+        graduationDate: {
+          value: this.props.eduToEdit.graduationDate,
+          id: uniqid(),
+        },
+        gpa: {
+          value: this.props.eduToEdit.gpa,
+          id: uniqid(),
+        },
+        id: {
+          value: this.props.eduToEdit.id,
+        },
+      };
+    } else {
+      this.state = {
+        schoolName: {
+          value: "",
+          id: uniqid(),
+        },
+        titleOfStudy: {
+          value: "",
+          id: uniqid(),
+        },
+        graduationDate: {
+          value: "",
+          id: uniqid(),
+        },
+        gpa: {
+          value: "",
+          id: uniqid(),
+        },
+      };
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -32,6 +56,12 @@ class EducationForm extends Component {
 
   handleClick(e) {
     e.preventDefault();
+    if (this.props.editItem) {
+      this.props.updater(this.newSchool());
+
+      this.props.toggleEditItem();
+      return;
+    }
     this.props.onButtonClicked(this.newSchool());
     this.setState({
       schoolName: {
@@ -69,7 +99,7 @@ class EducationForm extends Component {
       titleOfStudy: this.state.titleOfStudy.value,
       graduationDate: this.state.graduationDate.value,
       gpa: this.state.gpa.value,
-      id: uniqid(),
+      id: this.state.id ? this.state.id.value : uniqid(),
     };
   }
 
@@ -99,10 +129,10 @@ class EducationForm extends Component {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="graduationDate">Date of Studies: </label>
+          <label htmlFor="graduationDate">Graduation Date: </label>
           <input
             className="form-control"
-            type="text"
+            type="date"
             name="graduationDate"
             id="graduationDate"
             value={this.state.graduationDate.value}
@@ -126,13 +156,17 @@ class EducationForm extends Component {
             className="btn btn-primary col-sm-2"
             onClick={this.handleClick}
           >
-            Add
+            {this.props.editItem ? "Update" : "Add"}
           </button>
           <span className="col-md-auto"></span>
           <button
             type="button"
             className="btn btn-secondary col-sm-2"
-            onClick={this.props.toggleAdder}
+            onClick={
+              this.props.editItem
+                ? this.props.toggleEditItem
+                : this.props.toggleAdder
+            }
           >
             Cancel
           </button>
@@ -145,6 +179,10 @@ class EducationForm extends Component {
 EducationForm.propTypes = {
   onButtonClicked: PropTypes.func,
   toggleAdder: PropTypes.func,
+  eduToEdit: PropTypes.object,
+  editItem: PropTypes.bool,
+  toggleEditItem: PropTypes.func,
+  updater: PropTypes.func,
 };
 
 export default EducationForm;
