@@ -63,24 +63,7 @@ class EducationForm extends Component {
       return;
     }
     this.props.onButtonClicked(this.newSchool());
-    this.setState({
-      schoolName: {
-        value: "",
-        id: uniqid(),
-      },
-      titleOfStudy: {
-        value: "",
-        id: uniqid(),
-      },
-      graduationDate: {
-        value: "",
-        id: uniqid(),
-      },
-      gpa: {
-        value: "",
-        id: uniqid(),
-      },
-    });
+
     this.props.toggleAdder();
   }
   handleChange(e) {
