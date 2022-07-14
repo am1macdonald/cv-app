@@ -13,9 +13,9 @@ class App extends Component {
 
     this.state = {
       personalInfo: {
-        name: "Joe",
-        email: "joe@mail.org",
-        phoneNumber: "234.234.2344",
+        name: "Joe Blow",
+        email: "joe@boremail.org",
+        phoneNumber: "123.456.7890",
       },
       education: [
         {
@@ -28,11 +28,11 @@ class App extends Component {
       ],
       experience: [
         {
-          companyName: "Place 1",
-          positionTitle: "Jobby 1",
-          duties: "a description of duties",
-          startDate: "2020-01-01",
-          endDate: "2021-01-01",
+          companyName: "The Box Company",
+          positionTitle: "Lead-Assistant Box Folder",
+          duties: "Assist the box folder with their box folding duties",
+          startDate: "2020-08-13",
+          endDate: "2021-4-11",
           id: uniqid(),
         },
       ],
@@ -51,9 +51,10 @@ class App extends Component {
     this.editEducation = this.editEducation.bind(this);
 
     this.addExperience = this.addExperience.bind(this);
-    this.deleteExperience = this.deleteExperience.bind(this);
-
     this.toggleExperienceForm = this.toggleExperienceForm.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
+    this.editExperience = this.editExperience.bind(this);
+
 
     this.toggleEditing = this.toggleEditing.bind(this);
   }
@@ -90,6 +91,16 @@ class App extends Component {
       experience: this.state.experience.filter((exp) => {
         return exp.id !== key;
       }),
+    });
+  }
+  editExperience(obj) {
+    this.setState({
+      experience: this.state.experience.map((exp) => {
+        if (exp.id === obj.id) {
+          return obj;
+        }
+        return exp;
+      })
     });
   }
   toggleExperienceForm() {
@@ -182,7 +193,9 @@ class App extends Component {
           delete={this.deleteExperience}
           toggleAdder={this.toggleExperienceForm}
           formActive={this.state.experienceFormActive}
+          editing={this.state.editing}
           toggleEditing={this.toggleEditing}
+          updater={this.editExperience}
         />
         {this.state.experienceFormActive && (
           <ExperienceForm

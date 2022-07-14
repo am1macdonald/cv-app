@@ -7,28 +7,56 @@ class ExperienceForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      companyName: {
-        value: "",
-        id: uniqid(),
-      },
-      positionTitle: {
-        value: "",
-        id: uniqid(),
-      },
-      duties: {
-        value: "",
-        id: uniqid(),
-      },
-      startDate: {
-        value: "",
-        id: uniqid(),
-      },
-      endDate: {
-        value: "",
-        id: uniqid(),
-      },
-    };
+    if (this.props.expToEdit) {
+      this.state = {
+        companyName: {
+          value: this.props.expToEdit.companyName,
+          id: uniqid(),
+        },
+        positionTitle: {
+          value: this.props.expToEdit.positionTitle,
+          id: uniqid(),
+        },
+        duties: {
+          value: this.props.expToEdit.duties,
+          id: uniqid(),
+        },
+        startDate: {
+          value: this.props.expToEdit.startDate,
+          id: uniqid(),
+        },
+        endDate: {
+          value: this.props.expToEdit.endDate,
+          id: uniqid(),
+        },
+        id: {
+          value: this.props.expToEdit.id,
+        },
+      };
+    } else {
+      this.state = {
+        companyName: {
+          value: "",
+          id: uniqid(),
+        },
+        positionTitle: {
+          value: "",
+          id: uniqid(),
+        },
+        duties: {
+          value: "",
+          id: uniqid(),
+        },
+        startDate: {
+          value: "",
+          id: uniqid(),
+        },
+        endDate: {
+          value: "",
+          id: uniqid(),
+        },
+      };
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -37,29 +65,13 @@ class ExperienceForm extends Component {
 
   handleClick(e) {
     e.preventDefault();
+    if (this.props.editItem) {
+      this.props.updater(this.newExperience());
+      this.props.toggleEditItem();
+      return;
+    }
+
     this.props.onButtonClicked(this.newExperience());
-    this.setState({
-      companyName: {
-        value: "",
-        id: uniqid(),
-      },
-      positionTitle: {
-        value: "",
-        id: uniqid(),
-      },
-      duties: {
-        value: "",
-        id: uniqid(),
-      },
-      startDate: {
-        value: "",
-        id: uniqid(),
-      },
-      endDate: {
-        value: "",
-        id: uniqid(),
-      },
-    });
     this.props.toggleAdder();
   }
   handleChange(e) {
@@ -79,7 +91,7 @@ class ExperienceForm extends Component {
       duties: this.state.duties.value,
       startDate: this.state.startDate.value,
       endDate: this.state.endDate.value,
-      id: uniqid(),
+      id: this.state.id ? this.state.id.value : uniqid(),
     };
   }
 
@@ -149,13 +161,17 @@ class ExperienceForm extends Component {
             className="btn btn-primary col-sm-2"
             onClick={this.handleClick}
           >
-            Add
+            {this.props.editItem ? "Update" : "Add"}
           </button>
           <span className="col-md-auto"></span>
           <button
             type="button"
             className="btn btn-secondary col-sm-2"
-            onClick={this.props.toggleAdder}
+            onClick={
+              this.props.editItem
+                ? this.props.toggleEditItem
+                : this.props.toggleAdder
+            }
           >
             Cancel
           </button>
@@ -168,6 +184,10 @@ class ExperienceForm extends Component {
 ExperienceForm.propTypes = {
   onButtonClicked: PropTypes.func,
   toggleAdder: PropTypes.func,
+  expToEdit: PropTypes.object,
+  editItem: PropTypes.bool,
+  toggleEditItem: PropTypes.func,
+  updater: PropTypes.func,
 };
 
 export default ExperienceForm;
