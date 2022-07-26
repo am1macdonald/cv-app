@@ -57,17 +57,25 @@ ListItem.propTypes = {
   updater: PropTypes.func
 };
 
-function EducationDisplay(props) {
-  const eduArray = props.education;
+function EducationDisplay({
+  education,
+  deleteItem,
+  openForm,
+  formActive,
+  editing,
+  toggleEditing,
+  updater
+}) {
+  const eduArray = education;
 
   const eduNodes = eduArray.map((edu) => (
     <ListItem
       key={edu.id}
-      deleteItem={props.delete}
+      deleteItem={deleteItem}
       edu={edu}
-      editing={props.editing}
-      toggleEditing={props.toggleEditing}
-      updater={props.updater}
+      editing={editing}
+      toggleEditing={toggleEditing}
+      updater={updater}
     />
   ));
 
@@ -75,11 +83,11 @@ function EducationDisplay(props) {
     <div className="container-sm mb-5">
       <h4>Education:</h4>
       <ul className="list-group list-group-flush">{eduNodes}</ul>
-      {!props.formActive && (
+      {!formActive && (
         <button
           className="btn btn-primary"
           type="button"
-          onClick={props.toggleAdder}
+          onClick={openForm}
         >
           Add Education
         </button>
@@ -90,8 +98,8 @@ function EducationDisplay(props) {
 
 EducationDisplay.propTypes = {
   education: PropTypes.array,
-  delete: PropTypes.func,
-  toggleAdder: PropTypes.func,
+  deleteItem: PropTypes.func,
+  openForm: PropTypes.func,
   formActive: PropTypes.bool,
   editing: PropTypes.bool,
   toggleEditing: PropTypes.func,

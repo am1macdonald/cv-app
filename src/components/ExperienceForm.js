@@ -39,7 +39,7 @@ function ExperienceForm(props) {
     }
 
     props.onButtonClicked(newExperience());
-    props.toggleAdder();
+    props.closeForm();
   }
 
   return (
@@ -113,7 +113,7 @@ function ExperienceForm(props) {
         <button
           type="button"
           className="btn btn-secondary col-sm-2"
-          onClick={props.editItem ? props.toggleEditItem : props.toggleAdder}
+          onClick={props.editItem ? props.toggleEditItem : props.closeForm}
         >
           Cancel
         </button>
@@ -124,7 +124,7 @@ function ExperienceForm(props) {
 
 ExperienceForm.propTypes = {
   onButtonClicked: PropTypes.func,
-  toggleAdder: PropTypes.func,
+  closeForm: PropTypes.func,
   expToEdit: PropTypes.object,
   editItem: PropTypes.bool,
   toggleEditItem: PropTypes.func,

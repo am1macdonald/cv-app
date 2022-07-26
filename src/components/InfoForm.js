@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function InfoForm(props) {
+
   const [name, setName] = useState(
-    props.personalInfo.name ? props.personalInfo.name : ""
+    props.personalInfo ? props.personalInfo.fullName : ""
   );
   const [email, setEmail] = useState(
     props.personalInfo ? props.personalInfo.email : ""
@@ -11,19 +12,21 @@ function InfoForm(props) {
   const [phoneNumber, setPhoneNumber] = useState(
     props.personalInfo ? props.personalInfo.phoneNumber : ""
   );
+  console.log(name, email, phoneNumber)
 
   function newInfo() {
     return {
-      name: name.value,
-      email: email.value,
-      phoneNumber: phoneNumber.value,
+      fullName: name,
+      email: email,
+      phoneNumber: phoneNumber,
     };
   }
 
   function handleClick(e) {
     e.preventDefault();
+    console.log(newInfo());
     props.onButtonClicked(newInfo());
-    props.toggleUpdateInfo();
+    props.closeEditor();
   }
 
   return (
@@ -37,7 +40,7 @@ function InfoForm(props) {
           type="text"
           name="name"
           id="name"
-          value={name.value}
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
@@ -50,7 +53,7 @@ function InfoForm(props) {
           type="email"
           name="email"
           id="email"
-          value={email.value}
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
@@ -63,7 +66,7 @@ function InfoForm(props) {
           type="tel"
           name="phoneNumber"
           id="phone-number"
-          value={phoneNumber.value}
+          value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
         />
@@ -80,7 +83,7 @@ function InfoForm(props) {
         <button
           type="button"
           className="btn btn-secondary col-sm-2"
-          onClick={props.toggleUpdateInfo}
+          onClick={props.closeEditor}
         >
           Cancel
         </button>
@@ -91,7 +94,7 @@ function InfoForm(props) {
 
 InfoForm.propTypes = {
   onButtonClicked: PropTypes.func,
-  toggleUpdateInfo: PropTypes.func,
+  closeEditor: PropTypes.func,
   personalInfo: PropTypes.object,
 };
 

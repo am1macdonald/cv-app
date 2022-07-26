@@ -16,16 +16,17 @@ function EducationForm(props) {
 
   function newSchool() {
     return {
-      schoolName: schoolName.value,
-      titleOfStudy: titleOfStudy.value,
-      graduationDate: graduationDate.value,
-      gpa: gpa.value,
+      schoolName: schoolName,
+      titleOfStudy: titleOfStudy,
+      graduationDate: graduationDate,
+      gpa: gpa,
       id: props.eduToEdit ? props.eduToEdit.id : uniqid(),
     };
   }
 
   function handleClick(e) {
     e.preventDefault();
+    console.log(newSchool())
 
     if (props.editItem) {
       props.updater(newSchool());
@@ -34,7 +35,7 @@ function EducationForm(props) {
     }
 
     props.onButtonClicked(newSchool());
-    props.toggleAdder();
+    props.closeForm();
   }
 
   return (
@@ -95,7 +96,7 @@ function EducationForm(props) {
         <button
           type="button"
           className="btn btn-secondary col-sm-2"
-          onClick={props.editItem ? props.toggleEditItem : props.toggleAdder}
+          onClick={props.editItem ? props.toggleEditItem : props.closeForm}
         >
           Cancel
         </button>
@@ -106,7 +107,7 @@ function EducationForm(props) {
 
 EducationForm.propTypes = {
   onButtonClicked: PropTypes.func,
-  toggleAdder: PropTypes.func,
+  closeForm: PropTypes.func,
   eduToEdit: PropTypes.object,
   editItem: PropTypes.bool,
   toggleEditItem: PropTypes.func,

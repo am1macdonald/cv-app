@@ -59,17 +59,25 @@ ListItem.propTypes = {
   updater: PropTypes.func,
 };
 
-function ExperienceDisplay(props) {
-  const experienceArray = props.experiences;
+function ExperienceDisplay({
+  experiences,
+  deleteItem,
+  openForm,
+  formActive,
+  editing,
+  toggleEditing,
+  updater
+}) {
+  const experienceArray = experiences;
 
   const experienceNodes = experienceArray.map((exp) => (
     <ListItem 
     key={exp.id}
-    deleteItem={props.delete}
+    deleteItem={deleteItem}
     exp={exp}
-    editing={props.editing}
-    toggleEditing={props.toggleEditing}
-    updater={props.updater}
+    editing={editing}
+    toggleEditing={toggleEditing}
+    updater={updater}
 
     
     />
@@ -79,11 +87,11 @@ function ExperienceDisplay(props) {
     <div className="container-sm">
       <h4>Experience:</h4>
       <ul className="list-group list-group-flush">{experienceNodes}</ul>
-      {!props.formActive && (
+      {!formActive && (
         <button
           className="btn btn-primary"
           type="button"
-          onClick={props.toggleAdder}
+          onClick={openForm}
         >
           Add Experience
         </button>
@@ -95,8 +103,8 @@ function ExperienceDisplay(props) {
 ExperienceDisplay.propTypes = {
   experiences: PropTypes.array,
   formActive: PropTypes.bool,
-  delete: PropTypes.func,
-  toggleAdder: PropTypes.func,
+  deleteItem: PropTypes.func,
+  openForm: PropTypes.func,
   editing: PropTypes.bool,
   toggleEditing: PropTypes.func,
   updater: PropTypes.func
