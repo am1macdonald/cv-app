@@ -12,7 +12,6 @@ function InfoForm(props) {
   const [phoneNumber, setPhoneNumber] = useState(
     props.personalInfo ? props.personalInfo.phoneNumber : ""
   );
-  console.log(name, email, phoneNumber)
 
   function newInfo() {
     return {
@@ -24,7 +23,6 @@ function InfoForm(props) {
 
   function handleClick(e) {
     e.preventDefault();
-    console.log(newInfo());
     props.onButtonClicked(newInfo());
     props.closeEditor();
   }
