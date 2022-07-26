@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import uniqid from "uniqid";
 import PropTypes from "prop-types";
 
@@ -13,6 +13,12 @@ function EducationForm(props) {
     props.eduToEdit ? props.eduToEdit.graduationDate : ""
   );
   const [gpa, setGpa] = useState(props.eduToEdit ? props.eduToEdit.gpa : "");
+
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    formRef.current.scrollIntoView();
+  })
 
   function newSchool() {
     return {
@@ -38,7 +44,7 @@ function EducationForm(props) {
   }
 
   return (
-    <form className="container-sm mb-5">
+    <form ref={formRef} className="container-sm mb-5">
       <div className="mb-3">
         <label htmlFor="school-name">School Name: </label>
         <input

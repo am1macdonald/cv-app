@@ -2,17 +2,27 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import ExperienceForm from "./ExperienceForm";
 
-function ListItem(props) {
-  const [editThisItem, toggleEditThisItem] = useState(false);
+function ListItem({
+  exp,
+  deleteItem,
+  editing,
+  updater,
+  startEditing,
+  endEditing,
+  buttonDisabled,
+}) {
+
+  
+  const [editThisItem, setEditThisItem] = useState(false);
 
   const handleEdit = () => {
-    if (props.editing && !editThisItem) {
+    if (editing && !editThisItem) {
       return;
     }
-    props.toggleEditing();
-    toggleEditThisItem(!editThisItem);
+    startEditing();
+    setEditThisItem(true);
   };
-  const exp = props.exp;
+
 
   return (
     <li key={exp.id} className="list-group-item">
@@ -34,18 +44,28 @@ function ListItem(props) {
             className="btn btn-secondary col-sm-2"
             value="Edit"
             onClick={handleEdit}
+            disabled={buttonDisabled}
           />
           <span className="col-sm-auto"></span>
           <input
             type="button"
             className="btn btn-danger col-sm-2"
             value="Delete"
-            onClick={() => props.deleteItem(exp.id)}
+            onClick={() => deleteItem(exp.id)}
+            disabled={buttonDisabled}
           />
         </div>
       )}
       {editThisItem && (
-        <ExperienceForm expToEdit={exp} editItem={editThisItem} toggleEditItem={handleEdit} updater={props.updater} />
+        <ExperienceForm
+          expToEdit={exp}
+          editItem={editThisItem}
+          updater={updater}
+          endEditing={() => {
+            endEditing();
+            setEditThisItem(false);
+          }}
+        />
       )}
     </li>
   );
@@ -55,8 +75,10 @@ ListItem.propTypes = {
   exp: PropTypes.object,
   deleteItem: PropTypes.func,
   editing: PropTypes.bool,
-  toggleEditing: PropTypes.func,
   updater: PropTypes.func,
+  startEditing: PropTypes.func,
+  endEditing: PropTypes.func,
+  buttonDisabled: PropTypes.bool,
 };
 
 function ExperienceDisplay({
@@ -65,34 +87,32 @@ function ExperienceDisplay({
   openForm,
   formActive,
   editing,
-  toggleEditing,
-  updater
+  startEditing,
+  endEditing,
+  updater,
+  buttonDisabled,
 }) {
   const experienceArray = experiences;
 
   const experienceNodes = experienceArray.map((exp) => (
-    <ListItem 
-    key={exp.id}
-    deleteItem={deleteItem}
-    exp={exp}
-    editing={editing}
-    toggleEditing={toggleEditing}
-    updater={updater}
-
-    
+    <ListItem
+      key={exp.id}
+      deleteItem={deleteItem}
+      exp={exp}
+      editing={editing}
+      startEditing={() => startEditing()}
+      endEditing={() => endEditing()}
+      updater={updater}
+      buttonDisabled={buttonDisabled}
     />
   ));
 
   return (
-    <div className="container-sm">
+    <div className="container-sm mb-5">
       <h4>Experience:</h4>
       <ul className="list-group list-group-flush">{experienceNodes}</ul>
       {!formActive && (
-        <button
-          className="btn btn-primary"
-          type="button"
-          onClick={openForm}
-        >
+        <button className="btn btn-primary" type="button" onClick={openForm} disabled={buttonDisabled}>
           Add Experience
         </button>
       )}
@@ -106,8 +126,10 @@ ExperienceDisplay.propTypes = {
   deleteItem: PropTypes.func,
   openForm: PropTypes.func,
   editing: PropTypes.bool,
-  toggleEditing: PropTypes.func,
-  updater: PropTypes.func
+  updater: PropTypes.func,
+  startEditing: PropTypes.func,
+  endEditing: PropTypes.func,
+  buttonDisabled: PropTypes.bool,
 };
 
 export default ExperienceDisplay;

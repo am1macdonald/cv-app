@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import uniqid from "uniqid";
 import PropTypes from "prop-types";
 
@@ -19,6 +19,12 @@ function ExperienceForm(props) {
     props.expToEdit ? props.expToEdit.endDate : ""
   );
 
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    formRef.current.scrollIntoView();
+  })
+  
   function newExperience() {
     return {
       companyName: companyName,
@@ -32,9 +38,10 @@ function ExperienceForm(props) {
 
   function handleClick(e) {
     e.preventDefault();
+    
     if (props.editItem) {
       props.updater(newExperience());
-      props.toggleEditItem();
+      props.endEditing();
       return;
     }
 
@@ -43,7 +50,7 @@ function ExperienceForm(props) {
   }
 
   return (
-    <form className="container-sm mb-1">
+    <form ref={formRef} className="container-sm mb-1">
       <div className="mb-3">
         <label htmlFor="company-name">Company Name: </label>
         <input
@@ -113,7 +120,7 @@ function ExperienceForm(props) {
         <button
           type="button"
           className="btn btn-secondary col-sm-2"
-          onClick={props.editItem ? props.toggleEditItem : props.closeForm}
+          onClick={props.editItem ? props.endEditing : props.closeForm}
         >
           Cancel
         </button>
@@ -127,8 +134,8 @@ ExperienceForm.propTypes = {
   closeForm: PropTypes.func,
   expToEdit: PropTypes.object,
   editItem: PropTypes.bool,
-  toggleEditItem: PropTypes.func,
   updater: PropTypes.func,
+  endEditing: PropTypes.func
 };
 
 export default ExperienceForm;

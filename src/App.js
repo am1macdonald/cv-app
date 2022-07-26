@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import uniqid from "uniqid";
 import EducationForm from "./components/EducationForm";
 import ExperienceForm from "./components/ExperienceForm";
@@ -10,7 +10,7 @@ import EducationDisplay from "./components/EducationDisplay";
 function App() {
   const [personalInfo, setPersonalInfo] = useState({
     fullName: "Joe Dobson",
-    email: "joeDobson@mail.org",
+    email: "joeDobson@mail.com",
     phoneNumber: "123.456.7890",
   });
 
@@ -25,11 +25,11 @@ function App() {
   ]);
   const [experience, setExperience] = useState([
     {
-      companyName: "The Box Company",
+      companyName: "The Company",
       positionTitle: "Supervisor",
-      duties: "Supervise box making operations",
+      duties: "Supervise operations",
       startDate: "2020-08-13",
-      endDate: "2021-4-11",
+      endDate: "2021-04-11",
       id: uniqid(),
     },
   ]);
@@ -43,6 +43,12 @@ function App() {
   const [editing, setEditing] = useState(false);
 
   const [formLockout, setFormLockout] = useState(false);
+
+  useEffect(() => {
+    if (updatingInfo || updatingExperience || updatingEducation || editing) {
+      setFormLockout(true);
+    } else setFormLockout(false);
+  });
 
   const updateInfo = ({ fullName, email, phoneNumber }) => {
     setPersonalInfo({
@@ -109,20 +115,15 @@ function App() {
       </div>
       <InfoDisplay
         personalInfo={personalInfo}
-        openEditor={() => {
-          if (!formLockout) {
-            setUpdatingInfo(true);
-            setFormLockout(true);
-          }
-        }}
+        openEditor={() => setUpdatingInfo(true)}
         formActive={updatingInfo}
+        buttonDisabled={formLockout}
       />
       {updatingInfo && (
         <InfoForm
           onButtonClicked={updateInfo}
           closeEditor={() => {
             setUpdatingInfo(false);
-            setFormLockout(false);
           }}
           personalInfo={personalInfo}
         />
@@ -130,36 +131,18 @@ function App() {
       <EducationDisplay
         education={education}
         deleteItem={deleteEducation}
-        openForm={() => {
-          if (!formLockout) {
-            setUpdatingEducation(true);
-            setFormLockout(true);
-          }
-        }}
+        openForm={() => setUpdatingEducation(true)}
         formActive={updatingEducation}
         editing={editing}
-        startEditing={() => {
-          if (!formLockout) {
-            setEditing(true);
-            setFormLockout(true);
-          }
-        }}
-        endEditing={() => {
-          setEditing(false);
-          setFormLockout(false);
-        }}
+        startEditing={() => setEditing(true)}
+        endEditing={() => setEditing(false)}
         updater={editEducation}
-        formLockout={formLockout}
+        buttonDisabled={formLockout}
       />
       {updatingEducation && (
         <EducationForm
           onButtonClicked={addEducation}
-          closeForm={() => {
-            {
-              setUpdatingEducation(false);
-              setFormLockout(false);
-            }
-          }}
+          closeForm={() => setUpdatingEducation(false)}
         />
       )}
       <ExperienceDisplay
@@ -168,8 +151,10 @@ function App() {
         openForm={() => setUpdatingExperience(true)}
         formActive={updatingExperience}
         editing={editing}
-        toggleEditing={() => setEditing(!editing)}
+        startEditing={() => setEditing(true)}
+        endEditing={() => setEditing(false)}
         updater={editExperience}
+        buttonDisabled={formLockout}
       />
       {updatingExperience && (
         <ExperienceForm

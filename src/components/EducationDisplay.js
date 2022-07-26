@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import EducationForm from "./EducationForm";
 
 function ListItem(props) {
-  const [editThisItem, toggleEditThisItem] = useState(false);
+  const [editThisItem, setEditThisItem] = useState(false);
 
   const handleEdit = () => {
     if (props.formLockout) {
@@ -13,7 +13,7 @@ function ListItem(props) {
       return;
     }
     props.startEditing();
-    toggleEditThisItem(!editThisItem);
+    setEditThisItem(true);
   };
   const edu = props.edu;
   return (
@@ -36,6 +36,7 @@ function ListItem(props) {
             className="btn btn-secondary col-sm-2"
             value="Edit"
             onClick={handleEdit}
+            disabled={props.buttonDisabled}
           />
           <span className="col-sm-auto"></span>
           <input
@@ -43,6 +44,7 @@ function ListItem(props) {
             className="btn btn-danger mr-2 col-sm-2"
             value="Delete"
             onClick={() => props.deleteItem(edu.id)}
+            disabled={props.buttonDisabled}
           />
         </div>
       )}
@@ -54,7 +56,7 @@ function ListItem(props) {
           updater={props.updater}
           endEditing={() => {
             props.endEditing();
-            toggleEditThisItem(false);
+            setEditThisItem(false);
           }}
         />
       )}
@@ -70,6 +72,7 @@ ListItem.propTypes = {
   startEditing: PropTypes.func,
   endEditing: PropTypes.func,
   formLockout: PropTypes.bool,
+  buttonDisabled: PropTypes.bool
 };
 
 function EducationDisplay({
@@ -78,10 +81,10 @@ function EducationDisplay({
   openForm,
   formActive,
   editing,
-  updater,
-  formLockout,
   startEditing,
   endEditing,
+  updater,
+  buttonDisabled,
 }) {
   const eduArray = education;
 
@@ -91,16 +94,10 @@ function EducationDisplay({
       deleteItem={deleteItem}
       edu={edu}
       editing={editing}
-      startEditing={() => {
-        if (!formLockout) {
-          startEditing();
-        }
-      }}
-      endEditing={() => {
-        endEditing();
-      }}
-      formLockout={formLockout}
+      startEditing={() => startEditing()}
+      endEditing={() => endEditing()}
       updater={updater}
+      buttonDisabled={buttonDisabled}
     />
   ));
 
@@ -109,7 +106,12 @@ function EducationDisplay({
       <h4>Education:</h4>
       <ul className="list-group list-group-flush">{eduNodes}</ul>
       {!formActive && (
-        <button className="btn btn-primary" type="button" onClick={openForm}>
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={openForm}
+          disabled={buttonDisabled}
+        >
           Add Education
         </button>
       )}
@@ -127,6 +129,7 @@ EducationDisplay.propTypes = {
   formActive: PropTypes.bool,
   editing: PropTypes.bool,
   formLockout: PropTypes.bool,
+  buttonDisabled: PropTypes.bool,
 };
 
 export default EducationDisplay;
