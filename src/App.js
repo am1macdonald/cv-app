@@ -9,8 +9,8 @@ import EducationDisplay from "./components/EducationDisplay";
 
 function App() {
   const [personalInfo, setPersonalInfo] = useState({
-    fullName: "Joe Blow",
-    email: "joe@boremail.org",
+    fullName: "Joe Dobson",
+    email: "joeDobson@mail.org",
     phoneNumber: "123.456.7890",
   });
 
@@ -26,8 +26,8 @@ function App() {
   const [experience, setExperience] = useState([
     {
       companyName: "The Box Company",
-      positionTitle: "Lead-Assistant Box Folder",
-      duties: "Assist the box folder with their box folding duties",
+      positionTitle: "Supervisor",
+      duties: "Supervise box making operations",
       startDate: "2020-08-13",
       endDate: "2021-4-11",
       id: uniqid(),
@@ -42,6 +42,8 @@ function App() {
 
   const [editing, setEditing] = useState(false);
 
+  const [formLockout, setFormLockout] = useState(false);
+
   const updateInfo = ({ fullName, email, phoneNumber }) => {
     setPersonalInfo({
       fullName,
@@ -53,6 +55,7 @@ function App() {
   const addExperience = (obj) => {
     setExperience([...experience, obj]);
   };
+
   const deleteExperience = (key) => {
     setExperience(
       experience.filter((exp) => {
@@ -60,6 +63,7 @@ function App() {
       })
     );
   };
+
   const editExperience = (obj) => {
     setExperience(
       experience.map((exp) => {
@@ -105,29 +109,57 @@ function App() {
       </div>
       <InfoDisplay
         personalInfo={personalInfo}
-        openEditor={() => setUpdatingInfo(true)}
+        openEditor={() => {
+          if (!formLockout) {
+            setUpdatingInfo(true);
+            setFormLockout(true);
+          }
+        }}
         formActive={updatingInfo}
       />
       {updatingInfo && (
         <InfoForm
           onButtonClicked={updateInfo}
-          closeEditor={() => setUpdatingInfo(false)}
+          closeEditor={() => {
+            setUpdatingInfo(false);
+            setFormLockout(false);
+          }}
           personalInfo={personalInfo}
         />
       )}
       <EducationDisplay
         education={education}
         deleteItem={deleteEducation}
-        openForm={() => setUpdatingEducation(true)}
+        openForm={() => {
+          if (!formLockout) {
+            setUpdatingEducation(true);
+            setFormLockout(true);
+          }
+        }}
         formActive={updatingEducation}
         editing={editing}
-        toggleEditing={() => setEditing(!editing)}
+        startEditing={() => {
+          if (!formLockout) {
+            setEditing(true);
+            setFormLockout(true);
+          }
+        }}
+        endEditing={() => {
+          setEditing(false);
+          setFormLockout(false);
+        }}
         updater={editEducation}
+        formLockout={formLockout}
       />
       {updatingEducation && (
         <EducationForm
           onButtonClicked={addEducation}
-          closeForm={() => setUpdatingEducation(false)}
+          closeForm={() => {
+            {
+              setUpdatingEducation(false);
+              setFormLockout(false);
+            }
+          }}
         />
       )}
       <ExperienceDisplay
@@ -136,7 +168,7 @@ function App() {
         openForm={() => setUpdatingExperience(true)}
         formActive={updatingExperience}
         editing={editing}
-        toggleEditing={() =>setEditing(!editing)}
+        toggleEditing={() => setEditing(!editing)}
         updater={editExperience}
       />
       {updatingExperience && (

@@ -26,11 +26,10 @@ function EducationForm(props) {
 
   function handleClick(e) {
     e.preventDefault();
-    console.log(newSchool())
 
     if (props.editItem) {
       props.updater(newSchool());
-      props.toggleEditItem();
+      props.endEditing();
       return;
     }
 
@@ -96,7 +95,7 @@ function EducationForm(props) {
         <button
           type="button"
           className="btn btn-secondary col-sm-2"
-          onClick={props.editItem ? props.toggleEditItem : props.closeForm}
+          onClick={props.editItem ? props.endEditing : props.closeForm}
         >
           Cancel
         </button>
@@ -110,8 +109,8 @@ EducationForm.propTypes = {
   closeForm: PropTypes.func,
   eduToEdit: PropTypes.object,
   editItem: PropTypes.bool,
-  toggleEditItem: PropTypes.func,
   updater: PropTypes.func,
+  endEditing: PropTypes.func,
 };
 
 export default EducationForm;
