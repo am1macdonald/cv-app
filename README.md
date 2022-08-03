@@ -1,22 +1,21 @@
-Resume Building CV Application
+# Resume Builder - CV Application
 
-Thanks for stopping by!
+Thanks for checking out my simple, mobile friendly CV application.
 
-This project was completed as part of the "Odin Project" curriculum.
+## About
 
-// about section under construction
+This project was completed as part of the ["Odin Project"](https://www.theodinproject.com/) curriculum.
 
-Design Patterns and Techniques
+// section under construction
 
-// technology section under construction
+## Technologies
 
+// section under construction
 
+## Challenges
 
-Challenges
+// section under construction
 
-// challenge section under construction
+## Installation
+Clone the repository && Run `npm install`
 
-
-Installation
-
-Clone the repository into desired folder and Run npm install
